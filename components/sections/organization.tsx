@@ -24,11 +24,13 @@ export function Organization() {
           {orgMembers.map((member, i) => (
             <StaggerItem key={member.name}>
               <div className="group relative overflow-hidden rounded-3xl bg-surface-muted p-1 hover-lift">
-                <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-200 relative">
-                  {/* Image Placeholder */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-navy-100 to-primary-50 flex items-center justify-center text-primary-200">
-                    <UserCheck size={64} className="opacity-20" />
-                  </div>
+                <div className="aspect-square w-full overflow-hidden rounded-2xl bg-gray-100 relative">
+                  <Image
+                    src={member.image || "/image/placeholder.png"}
+                    alt={member.name}
+                    fill
+                    className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+                  />
                   {/* Decorative overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>

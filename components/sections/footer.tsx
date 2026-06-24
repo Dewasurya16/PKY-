@@ -10,7 +10,10 @@ export function Footer() {
           {/* Brand Info */}
           <div className="pr-8">
             <a href="#beranda" className="flex items-center gap-3">
-              <img src="/image/logo.png" alt="Logo Kejaksaan" className="h-10 w-auto object-contain drop-shadow-sm" />
+              <div className="flex items-center gap-2">
+                <img src="/image/logo.png" alt="Logo Kejaksaan" className="h-10 w-auto object-contain drop-shadow-sm" />
+                <img src="/image/logo-klinik.png" alt="Logo Klinik Adhyaksa" className="h-10 w-auto object-contain drop-shadow-sm" />
+              </div>
               <span className="flex flex-col border-l border-navy/20 pl-3 gap-0.5">
                 <span className="font-display text-base font-extrabold text-navy leading-none tracking-tight">
                   {site.shortName}

@@ -55,8 +55,11 @@ export function Navbar() {
           <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-10">
             {/* Logo */}
             <Link href="/#beranda" className="flex items-center gap-3 group">
-              <img src="/image/logo.png" alt="Logo PKY" className="h-10 w-auto object-contain drop-shadow-sm" />
-              <span className="flex flex-col pl-3 gap-[2px] border-l-2 border-primary/40 dark:border-primary/60">
+              <div className="flex items-center gap-2">
+                <img src="/image/logo.png" alt="Logo PKY" className="h-10 w-auto object-contain drop-shadow-sm" />
+                <img src="/image/logo-klinik.png" alt="Logo Klinik Adhyaksa" className="h-10 w-auto object-contain drop-shadow-sm" />
+              </div>
+              <span className="hidden sm:flex flex-col pl-3 gap-[2px] border-l-2 border-primary/40 dark:border-primary/60">
                 <span className="font-display text-[15px] font-extrabold leading-none tracking-tight text-primary dark:text-white">
                   {site.shortName}
                 </span>
@@ -75,7 +78,7 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="group relative rounded-lg px-3.5 py-2 text-sm font-medium text-text-secondary transition-colors hover:text-primary dark:text-white/70 dark:hover:text-primary-light"
+                  className="group relative rounded-lg px-3 py-2 text-sm font-medium text-text-secondary transition-colors hover:text-primary dark:text-white/70 dark:hover:text-primary-light"
                 >
                   {link.label}
                   <span className="absolute inset-x-2 -bottom-0.5 h-0.5 scale-x-0 rounded-full bg-primary transition-transform duration-300 group-hover:scale-x-100 dark:bg-primary-light" />

@@ -4,17 +4,17 @@ import { SectionTag } from "@/components/ui/badge";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 import { ServiceCard } from "@/components/ui/cards";
 import { services } from "@/lib/site";
-import { Stethoscope, HeartPulse, Pill, Activity, ClipboardCheck, Ambulance } from "lucide-react";
+import { Building2, Hospital, ShieldCheck, Users, FileCheck, Box, Stethoscope } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const iconMap: Record<string, React.ElementType> = {
-  Stethoscope,
-  HeartPulse,
-  Pill,
-  Activity,
-  ClipboardCheck,
-  Ambulance,
+  Building2,
+  Hospital,
+  ShieldCheck,
+  Users,
+  FileCheck,
+  Box,
 };
 
 export function Process() {

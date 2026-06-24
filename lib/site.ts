@@ -13,11 +13,9 @@ export const site = {
 };
 
 export const navLinks = [
-  { href: "/#beranda", label: "Beranda" },
-  { href: "/#tentang", label: "Tentang" },
   { href: "/#layanan", label: "Layanan" },
-  { href: "/#proses", label: "Alur Layanan" },
-  { href: "/#tim", label: "Tim Medis" },
+  { href: "/#tim", label: "Struktural" },
+  { href: "/#transparansi", label: "Informasi Publik" },
   { href: "/#berita", label: "Berita" },
   { href: "/#faq", label: "FAQ" },
 ];
@@ -58,45 +56,45 @@ export const profileTabs = [
 
 export const services = [
   {
-    icon: "Stethoscope",
-    title: "Pemeriksaan Kesehatan Berkala",
+    icon: "Building2",
+    title: "Pembinaan Klinik Adhyaksa",
     description:
-      "Pelaksanaan medical check-up komprehensif bagi aparatur kejaksaan di seluruh Klinik Adhyaksa secara rutin.",
+      "Melakukan pembinaan, standardisasi, dan pengawasan operasional seluruh Klinik Adhyaksa di lingkungan Kejaksaan RI.",
     color: "teal",
   },
   {
-    icon: "HeartPulse",
-    title: "Konsultasi Medis Online",
+    icon: "Hospital",
+    title: "Pengawasan RS Adhyaksa",
     description:
-      "Layanan telemedicine dan konsultasi kesehatan daring dengan tenaga medis profesional kapan saja.",
+      "Mengawasi pengelolaan dan peningkatan mutu pelayanan Rumah Sakit Adhyaksa sebagai fasilitas kesehatan tingkat lanjut.",
     color: "rose",
   },
   {
-    icon: "Pill",
-    title: "Distribusi Obat & Alkes",
+    icon: "ShieldCheck",
+    title: "Penjaminan Mutu & Akreditasi",
     description:
-      "Penyediaan dan pendistribusian obat-obatan serta alkes ke seluruh Klinik dan RS Adhyaksa di Indonesia.",
+      "Menjamin standar keselamatan pasien, mutu layanan medis, serta mendorong tercapainya akreditasi paripurna di setiap faskes.",
     color: "amber",
   },
   {
-    icon: "Activity",
-    title: "Program Kesehatan Kerja",
+    icon: "Users",
+    title: "Manajemen SDM Kesehatan",
     description:
-      "Promosi kesehatan, pencegahan penyakit akibat kerja, dan pembinaan K3 di lingkungan kejaksaan.",
+      "Merencanakan alokasi dan mengembangkan kompetensi tenaga medis, paramedis, serta tenaga pendukung di fasilitas kesehatan.",
     color: "blue",
   },
   {
-    icon: "ClipboardCheck",
-    title: "Penilaian Kelayakan Kesehatan",
+    icon: "FileCheck",
+    title: "Standarisasi MCU Aparatur",
     description:
-      "Evaluasi kondisi kesehatan untuk penempatan jabatan, promosi, dan persiapan pensiun aparatur.",
+      "Menetapkan pedoman dan standar pelaksanaan Medical Check-Up berkala guna memastikan kesehatan paripurna bagi aparatur.",
     color: "purple",
   },
   {
-    icon: "Ambulance",
-    title: "Pengelolaan RS Adhyaksa",
+    icon: "Box",
+    title: "Tata Kelola Alkes & Obat",
     description:
-      "Pembinaan dan pengembangan Rumah Sakit Adhyaksa sebagai pusat rujukan utama bagi aparatur kejaksaan.",
+      "Mengkoordinasikan kebutuhan, penyediaan, dan tata kelola sarana prasarana kesehatan, alat medis, serta farmasi.",
     color: "emerald",
   },
 ];
@@ -128,26 +126,32 @@ export const orgMembers = [
   {
     name: "dr. Ratna Dewi Kusumawardani, Sp.PD., M.Kes.",
     role: "Kepala Pusat Kesehatan Yustisial",
+    image: "/image/ratna_dewi.png",
   },
   {
     name: "dr. Arief Budiman, Sp.OG.",
     role: "Wakil Kepala Bidang Rumah Sakit Adhyaksa",
+    image: "/image/arief_budiman.png",
   },
   {
     name: "drg. Sinta Maharani, M.M.",
     role: "Koordinator Kesehatan Gigi & Mulut",
+    image: "/image/sinta_maharani.png",
   },
   {
     name: "dr. Hendra Pratama, Sp.KJ.",
     role: "Koordinator Kesehatan Mental & Psikologi",
+    image: "/image/hendra_pratama.png",
   },
   {
     name: "Apt. Dian Puspitasari, M.Farm.",
     role: "Koordinator Farmasi & Distribusi Obat",
+    image: "/image/dian_puspitasari.png",
   },
   {
     name: "dr. Bagas Nugroho, Sp.KK.",
     role: "Koordinator Kesehatan Kerja & K3",
+    image: "/image/bagas_nugroho.png",
   },
 ];
 

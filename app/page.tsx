@@ -6,6 +6,7 @@ import { Workflow } from "@/components/sections/workflow";
 import { Process } from "@/components/sections/process";
 import { Gallery } from "@/components/sections/gallery";
 import { Organization } from "@/components/sections/organization";
+import { Transparency } from "@/components/sections/transparency";
 import { News } from "@/components/sections/news";
 import { CtaChannels } from "@/components/sections/cta-channels";
 import { Faq } from "@/components/sections/faq";
@@ -22,6 +23,7 @@ export default function HomePage() {
       <Process />
       <Gallery />
       <Organization />
+      <Transparency />
       <News />
       <CtaChannels />
       <Faq />
