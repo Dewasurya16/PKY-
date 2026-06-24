@@ -11,9 +11,9 @@ export function Organization() {
     <section id="tim" className="bg-white py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <SectionTag align="center">Struktural BPKY</SectionTag>
+          <SectionTag align="center">Struktural PKY</SectionTag>
           <h2 className="mt-5 text-balance font-display text-3xl font-bold leading-tight text-navy sm:text-4xl">
-            Pusat Pengelola Fasilitas Kesehatan Yudikatif
+            Pusat Pengelola Fasilitas Kesehatan Yustisial
           </h2>
           <p className="mt-4 text-base text-text-secondary">
             Biro yang berdedikasi membina dan mengawasi Klinik serta Rumah Sakit Adhyaksa untuk menjamin kualitas layanan kesehatan aparatur.

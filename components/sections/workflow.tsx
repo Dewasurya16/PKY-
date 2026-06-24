@@ -32,7 +32,7 @@ export function Workflow() {
     <section id="proses" className="relative overflow-hidden bg-white py-24 lg:py-32 dark:bg-navy-dark">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mb-16 flex flex-col items-center text-center">
-          <SectionTag align="center">Peran BPKY</SectionTag>
+          <SectionTag align="center">Peran PKY</SectionTag>
           <Reveal>
             <h2 className="mt-5 max-w-2xl text-balance font-display text-3xl font-bold leading-tight text-navy sm:text-4xl dark:text-white">
               Siklus Pembinaan Fasilitas Kesehatan

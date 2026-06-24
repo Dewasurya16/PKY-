@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   keywords: [
     "kejaksaan",
     "kesehatan",
-    "biro kesehatan yudikatif",
-    "BPKY",
+    "pusat kesehatan yustisial",
+    "PKY",
     "layanan kesehatan kejaksaan",
     "medical check up",
     "kesehatan aparatur",

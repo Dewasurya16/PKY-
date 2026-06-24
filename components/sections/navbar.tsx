@@ -54,13 +54,16 @@ export function Navbar() {
         >
           <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-10">
             {/* Logo */}
-            <Link href="/#beranda" className="flex items-center gap-3">
-              <img src="/image/logo.png" alt="Logo Kejaksaan" className="h-10 w-auto object-contain drop-shadow-sm" />
-              <span className="flex flex-col leading-none">
-                <span className="font-display text-lg font-bold text-navy dark:text-white">
+            <Link href="/#beranda" className="flex items-center gap-3 group">
+              <img src="/image/logo.png" alt="Logo PKY" className="h-10 w-auto object-contain drop-shadow-sm" />
+              <span className="flex flex-col pl-3 gap-[2px] border-l-2 border-primary/40 dark:border-primary/60">
+                <span className="font-display text-[15px] font-extrabold leading-none tracking-tight text-primary dark:text-white">
                   {site.shortName}
                 </span>
-                <span className="text-[10px] font-medium uppercase tracking-widest text-text-secondary dark:text-white/50">
+                <span className="text-[9.5px] font-bold leading-none tracking-[0.08em] uppercase text-navy/80 dark:text-primary-light">
+                  {site.fullName}
+                </span>
+                <span className="text-[8px] font-medium leading-none tracking-[0.12em] uppercase text-navy/40 dark:text-white/40 mt-[1px]">
                   {site.institution}
                 </span>
               </span>

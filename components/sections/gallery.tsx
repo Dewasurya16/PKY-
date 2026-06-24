@@ -11,7 +11,7 @@ const photos = [
   {
     id: 1,
     url: "/image/gedung.png",
-    caption: "Kantor Pusat BPKY",
+    caption: "Kantor Pusat PKY",
     desc: "Pusat komando dan pembinaan seluruh fasilitas kesehatan Kejaksaan."
   },
   {
@@ -28,7 +28,7 @@ const photos = [
   },
   {
     id: 4,
-    url: "/image/gedung 2.png",
+    url: "/image/gedung2.png",
     caption: "Pusat Pengembangan Medis",
     desc: "Fasilitas peningkatan kompetensi dan sertifikasi tenaga medis Kejaksaan."
   }
@@ -67,7 +67,7 @@ export function Gallery() {
     <section id="fasilitas" className="bg-surface-soft py-20 lg:py-32 dark:bg-navy-dark overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mb-12 flex flex-col items-center text-center">
-          <SectionTag align="center">Fasilitas Binaan BPKY</SectionTag>
+          <SectionTag align="center">Fasilitas Binaan PKY</SectionTag>
           <Reveal>
             <h2 className="mt-6 font-display text-3xl font-bold text-navy sm:text-4xl lg:text-5xl dark:text-white">
               Jaringan <span className="gradient-text">Fasilitas Kejaksaan</span>

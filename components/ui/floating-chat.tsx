@@ -23,7 +23,7 @@ export function FloatingChat() {
             <div className="bg-primary px-5 py-4 text-white">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-display text-sm font-bold">Bantuan Cepat BPKY</h3>
+                  <h3 className="font-display text-sm font-bold">Bantuan Cepat PKY</h3>
                   <p className="text-xs text-primary-50">Layanan Aktif 24/7</p>
                 </div>
                 <button 

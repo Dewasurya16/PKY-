@@ -150,7 +150,7 @@ export function SearchScheduleModal({ isOpen, onClose, filters }: SearchSchedule
               {/* Footer */}
               <div className="bg-surface-soft px-6 py-4 border-t border-gray-100 dark:bg-white/5 dark:border-white/10 text-center">
                 <p className="text-xs text-text-muted dark:text-white/50">
-                  Data di atas adalah simulasi direktori lokasi fasilitas kesehatan di bawah binaan BPKY.
+                  Data di atas adalah simulasi direktori lokasi fasilitas kesehatan di bawah binaan PKY.
                 </p>
               </div>
 

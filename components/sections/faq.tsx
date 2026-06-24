@@ -25,7 +25,7 @@ export function Faq() {
                 Pertanyaan yang sering diajukan
               </h2>
               <p className="mt-4 text-base text-text-secondary leading-relaxed">
-                Temukan jawaban cepat untuk pertanyaan umum seputar layanan, fasilitas, dan prosedur pendaftaran di Biro Pusat Kesehatan Yudikatif.
+                Temukan jawaban cepat untuk pertanyaan umum seputar layanan, fasilitas, dan prosedur pendaftaran di Pusat Kesehatan Yustisial.
               </p>
             </div>
           </Reveal>

@@ -1,15 +1,15 @@
 export const site = {
-  shortName: "BPKY",
-  fullName: "Biro Pusat Kesehatan Yudikatif",
+  shortName: "PKY",
+  fullName: "Pusat Kesehatan Yustisial",
   institution: "Kejaksaan Republik Indonesia",
   tagline:
     "Membina dan mengelola layanan kesehatan aparatur kejaksaan secara profesional, modern, dan terpercaya",
-  domain: "bpky.kejaksaan.go.id",
+  domain: "pky.kejaksaan.go.id",
   address:
     "Jl. Sultan Hasanuddin No. 1, Kebayoran Baru, Jakarta Selatan 12160",
   phone: "(021) 739-7088",
   hotline: "0800-1-500-600",
-  email: "bpky@kejaksaan.go.id",
+  email: "pky@kejaksaan.go.id",
 };
 
 export const navLinks = [
@@ -41,7 +41,7 @@ export const profileTabs = [
   {
     label: "Visi & Misi",
     body: [
-      "Visi: Menjadi pusat biro terdepan yang profesional dalam membina klinik dan rumah sakit untuk menjamin kesehatan aparatur kejaksaan.",
+      "Visi: Menjadi pusat kesehatan terdepan yang profesional dalam membina klinik dan rumah sakit untuk menjamin kesehatan aparatur kejaksaan.",
       "Misi: Menyelenggarakan pengawasan dan standarisasi layanan kesehatan berstandar tinggi di seluruh Klinik dan RS Adhyaksa.",
       "Misi: Memastikan ketersediaan obat, alat medis, serta SDM kesehatan yang kompeten di setiap satuan kerja kejaksaan.",
     ],
@@ -127,7 +127,7 @@ export const processSteps = [
 export const orgMembers = [
   {
     name: "dr. Ratna Dewi Kusumawardani, Sp.PD., M.Kes.",
-    role: "Kepala Biro Kesehatan Yudikatif",
+    role: "Kepala Pusat Kesehatan Yustisial",
   },
   {
     name: "dr. Arief Budiman, Sp.OG.",
@@ -160,17 +160,17 @@ export const newsItems = [
     title: "Jadwal MCU Semester II 2026 telah diterbitkan untuk seluruh satker",
     excerpt:
       "Pemeriksaan kesehatan berkala semester kedua akan dimulai Juli 2026 dengan cakupan 34 provinsi secara bertahap.",
-    content: "Biro Pusat Kesehatan Yudikatif (BPKY) Kejaksaan Republik Indonesia mengumumkan bahwa jadwal Medical Check Up (MCU) Semester II Tahun 2026 telah resmi diterbitkan. Pelaksanaan MCU ini merupakan bagian dari komitmen institusi untuk memastikan kesehatan optimal bagi seluruh aparatur negara di bawah Kejaksaan RI.\n\nPemeriksaan kesehatan ini akan dimulai pada awal bulan Juli 2026 dan dilaksanakan secara bertahap mencakup 34 provinsi di seluruh Indonesia. BPKY telah mengkoordinasikan kesiapan fasilitas di berbagai Rumah Sakit Adhyaksa dan Klinik Utama Adhyaksa di tingkat daerah.\n\nPara aparatur diimbau untuk segera mengecek jadwal spesifik di satuan kerja masing-masing dan melakukan konfirmasi kehadiran melalui portal daring BPKY."
+    content: "Pusat Kesehatan Yustisial (PKY) Kejaksaan Republik Indonesia mengumumkan bahwa jadwal Medical Check Up (MCU) Semester II Tahun 2026 telah resmi diterbitkan. Pelaksanaan MCU ini merupakan bagian dari komitmen institusi untuk memastikan kesehatan optimal bagi seluruh aparatur negara di bawah Kejaksaan RI.\n\nPemeriksaan kesehatan ini akan dimulai pada awal bulan Juli 2026 dan dilaksanakan secara bertahap mencakup 34 provinsi di seluruh Indonesia. PKY telah mengkoordinasikan kesiapan fasilitas di berbagai Rumah Sakit Adhyaksa dan Klinik Utama Adhyaksa di tingkat daerah.\n\nPara aparatur diimbau untuk segera mengecek jadwal spesifik di satuan kerja masing-masing dan melakukan konfirmasi kehadiran melalui portal daring PKY."
   },
   {
-    slug: "telemedicine-bpky-24-jam",
+    slug: "telemedicine-pky-24-jam",
     date: "15 Jun 2026",
     category: "Layanan",
     image: "/image/news_tele.png",
-    title: "Layanan telemedicine BPKY kini tersedia 24 jam via aplikasi mobile",
+    title: "Layanan telemedicine PKY kini tersedia 24 jam via aplikasi mobile",
     excerpt:
-      "Aparatur kejaksaan dapat berkonsultasi dengan dokter kapan saja melalui fitur video call di aplikasi BPKY Mobile.",
-    content: "Dalam upaya memberikan pelayanan kesehatan yang responsif dan inklusif, BPKY secara resmi mengumumkan pembaruan pada fitur aplikasi BPKY Mobile. Kini, layanan Telemedicine tersedia selama 24 jam penuh setiap harinya.\n\nPembaruan ini memungkinkan aparatur Kejaksaan untuk melakukan konsultasi medis darurat maupun non-darurat dengan dokter umum yang bertugas kapan saja, langsung melalui fitur Video Call terenkripsi.\n\nSelain itu, hasil konsultasi dan resep elektronik akan terintegrasi langsung ke dalam Rekam Medis Elektronik (RME) pasien, yang dapat diakses di seluruh jaringan Fasilitas Kesehatan Adhyaksa di Indonesia."
+      "Aparatur kejaksaan dapat berkonsultasi dengan dokter kapan saja melalui fitur video call di aplikasi PKY Mobile.",
+    content: "Dalam upaya memberikan pelayanan kesehatan yang responsif dan inklusif, PKY secara resmi mengumumkan pembaruan pada fitur aplikasi PKY Mobile. Kini, layanan Telemedicine tersedia selama 24 jam penuh setiap harinya.\n\nPembaruan ini memungkinkan aparatur Kejaksaan untuk melakukan konsultasi medis darurat maupun non-darurat dengan dokter umum yang bertugas kapan saja, langsung melalui fitur Video Call terenkripsi.\n\nSelain itu, hasil konsultasi dan resep elektronik akan terintegrasi langsung ke dalam Rekam Medis Elektronik (RME) pasien, yang dapat diakses di seluruh jaringan Fasilitas Kesehatan Adhyaksa di Indonesia."
   },
   {
     slug: "webinar-kesehatan-mental",
@@ -180,7 +180,7 @@ export const newsItems = [
     title: "Webinar kesehatan mental: mengelola stres di lingkungan kerja hukum",
     excerpt:
       "Program edukasi bulanan menghadirkan psikolog profesional untuk membahas kesehatan mental aparatur kejaksaan.",
-    content: "Sebagai aparatur penegak hukum, tekanan dan tantangan pekerjaan sehari-hari seringkali memicu beban mental yang signifikan. Mengingat pentingnya keseimbangan emosional, BPKY akan kembali menggelar Webinar Edukasi Kesehatan Mental bertajuk 'Mengelola Stres di Lingkungan Kerja Hukum'.\n\nAcara yang akan diselenggarakan secara virtual ini mengundang beberapa Psikolog Klinis terkemuka yang tergabung dalam tim Konsultasi Psikologi BPKY. Sesi ini akan membahas mengenai metode deteksi dini kelelahan mental (burnout), teknik relaksasi singkat, hingga bagaimana mencari bantuan profesional secara rahasia melalui fasilitas BPKY.\n\nWebinar terbuka bagi seluruh aparatur Kejaksaan beserta keluarga inti. Link pendaftaran dapat diakses melalui portal utama BPKY."
+    content: "Sebagai aparatur penegak hukum, tekanan dan tantangan pekerjaan sehari-hari seringkali memicu beban mental yang signifikan. Mengingat pentingnya keseimbangan emosional, PKY akan kembali menggelar Webinar Edukasi Kesehatan Mental bertajuk 'Mengelola Stres di Lingkungan Kerja Hukum'.\n\nAcara yang akan diselenggarakan secara virtual ini mengundang beberapa Psikolog Klinis terkemuka yang tergabung dalam tim Konsultasi Psikologi PKY. Sesi ini akan membahas mengenai metode deteksi dini kelelahan mental (burnout), teknik relaksasi singkat, hingga bagaimana mencari bantuan profesional secara rahasia melalui fasilitas PKY.\n\nWebinar terbuka bagi seluruh aparatur Kejaksaan beserta keluarga inti. Link pendaftaran dapat diakses melalui portal utama PKY."
   },
 ];
 
@@ -222,28 +222,28 @@ export const facilitiesData = [
 
 export const faqItems = [
   {
-    question: "Apa peran BPKY dalam layanan kesehatan?",
+    question: "Apa peran PKY dalam layanan kesehatan?",
     answer:
-      "BPKY adalah biro pusat yang membawahi, mengelola, dan membina seluruh Klinik dan Rumah Sakit Adhyaksa yang melayani aparatur Kejaksaan Republik Indonesia.",
+      "PKY adalah pusat yang membawahi, mengelola, dan membina seluruh Klinik dan Rumah Sakit Adhyaksa yang melayani aparatur Kejaksaan Republik Indonesia.",
   },
   {
     question: "Bagaimana cara mendaftar pemeriksaan kesehatan berkala?",
     answer:
-      "Pendaftaran MCU dapat dilakukan melalui portal daring BPKY, aplikasi BPKY Mobile, atau datang langsung ke Klinik Adhyaksa di masing-masing wilayah dengan membawa kartu identitas pegawai.",
+      "Pendaftaran MCU dapat dilakukan melalui portal daring PKY, aplikasi PKY Mobile, atau datang langsung ke Klinik Adhyaksa di masing-masing wilayah dengan membawa kartu identitas pegawai.",
   },
   {
     question: "Apakah tersedia layanan konsultasi dokter spesialis?",
     answer:
-      "Ya, BPKY menyediakan layanan konsultasi dengan dokter spesialis melalui program telemedicine dan klinik langsung. Untuk spesialisasi tertentu, BPKY bekerja sama dengan rumah sakit mitra untuk rujukan.",
+      "Ya, PKY menyediakan layanan konsultasi dengan dokter spesialis melalui program telemedicine dan klinik langsung. Untuk spesialisasi tertentu, PKY bekerja sama dengan rumah sakit mitra untuk rujukan.",
   },
   {
     question: "Apakah keluarga aparatur juga dilayani?",
     answer:
-      "Saat ini layanan BPKY diutamakan untuk aparatur aktif. Untuk keluarga, tersedia program rujukan ke fasilitas kesehatan mitra dengan tarif khusus melalui koordinasi BPKY.",
+      "Saat ini layanan PKY diutamakan untuk aparatur aktif. Untuk keluarga, tersedia program rujukan ke fasilitas kesehatan mitra dengan tarif khusus melalui koordinasi PKY.",
   },
   {
     question: "Bagaimana prosedur rujukan ke rumah sakit?",
     answer:
-      "Dokter BPKY akan memberikan surat rujukan resmi setelah konsultasi. Aparatur dapat memilih rumah sakit mitra yang tersedia di jaringan BPKY di seluruh Indonesia.",
+      "Dokter PKY akan memberikan surat rujukan resmi setelah konsultasi. Aparatur dapat memilih rumah sakit mitra yang tersedia di jaringan PKY di seluruh Indonesia.",
   },
 ];

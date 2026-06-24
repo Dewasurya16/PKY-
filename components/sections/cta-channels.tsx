@@ -64,8 +64,8 @@ export function CtaChannels() {
           {/* Image (Kanan) - Fixed Size & Pop-out Effect */}
           <div className="absolute bottom-0 right-0 w-full md:w-2/5 h-full pointer-events-none flex justify-center md:justify-end items-end md:pr-10 opacity-30 md:opacity-100 z-0">
             <img 
-              src="/image/jaksa 2.png" 
-              alt="Jaksa BPKY" 
+              src="/image/jaksa2.png" 
+              alt="Jaksa PKY" 
               className="h-[80%] md:h-[120%] w-auto max-w-none object-contain object-bottom drop-shadow-2xl" 
             />
           </div>

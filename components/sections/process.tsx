@@ -22,7 +22,7 @@ export function Process() {
     <section id="layanan" className="bg-surface-muted py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <SectionTag align="center">Fokus BPKY</SectionTag>
+          <SectionTag align="center">Fokus PKY</SectionTag>
           <h2 className="mt-5 text-balance font-display text-3xl font-bold leading-tight text-navy sm:text-4xl">
             Pembinaan fasilitas kesehatan komprehensif untuk aparatur kejaksaan
           </h2>

@@ -11,11 +11,14 @@ export function Footer() {
           <div className="pr-8">
             <a href="#beranda" className="flex items-center gap-3">
               <img src="/image/logo.png" alt="Logo Kejaksaan" className="h-10 w-auto object-contain drop-shadow-sm" />
-              <span className="flex flex-col leading-none">
-                <span className="font-display text-lg font-bold text-navy">
+              <span className="flex flex-col border-l border-navy/20 pl-3 gap-0.5">
+                <span className="font-display text-base font-extrabold text-navy leading-none tracking-tight">
                   {site.shortName}
                 </span>
-                <span className="text-[10px] font-medium uppercase tracking-widest2 text-text-muted">
+                <span className="text-[10px] font-bold text-primary leading-none tracking-wide uppercase">
+                  {site.fullName}
+                </span>
+                <span className="text-[8.5px] font-medium uppercase tracking-widest text-navy/50 leading-none mt-0.5">
                   {site.institution}
                 </span>
               </span>
@@ -54,7 +57,7 @@ export function Footer() {
             <h4 className="font-display font-bold text-navy mb-6">Layanan Populer</h4>
             <ul className="space-y-3.5 text-sm font-medium text-text-secondary">
               <li><a href="#" className="hover:text-primary transition-colors">Jadwal MCU 2026</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Telemedicine BPKY</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">Telemedicine PKY</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Klinik Gigi & Mulut</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Layanan Farmasi</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">Konsultasi Psikologi</a></li>

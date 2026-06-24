@@ -54,7 +54,7 @@ export function Hero() {
             >
               <Badge tone="teal">
                 <Star size={12} className="fill-primary" />
-                Biro Kesehatan Yudikatif Kejaksaan RI
+                Pusat Kesehatan Yustisial Kejaksaan RI
               </Badge>
             </motion.div>
 
@@ -91,7 +91,7 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="mt-6 max-w-lg text-base leading-relaxed text-text-secondary sm:text-lg dark:text-white/70"
             >
-              {site.fullName} ({site.shortName}) merupakan biro pusat yang membawahi,
+              {site.fullName} ({site.shortName}) merupakan pusat yang membawahi,
               mengawasi, dan membina Klinik serta Rumah Sakit Adhyaksa di seluruh
               lingkungan {site.institution}.
             </motion.p>
@@ -186,7 +186,7 @@ export function Hero() {
               className="relative z-10 w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[400px] flex justify-center"
             >
               <img 
-                src="/image/jaksa 1.png" 
+                src="/image/jaksa1.png" 
                 alt="Jaksa Profesional" 
                 className="w-auto h-auto max-h-[520px] object-contain drop-shadow-[0_20px_40px_rgba(27,58,92,0.15)] dark:drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]" 
               />

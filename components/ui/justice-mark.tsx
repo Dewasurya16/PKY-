@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * JusticeHeartbeatMark — Logo visual BPKY: garis EKG (denyut kesehatan)
+ * JusticeHeartbeatMark — Logo visual PKY: garis EKG (denyut kesehatan)
  * yang menyatu menjadi timbangan keadilan (yudikatif).
  * Menggunakan CSS animation untuk draw-in agar menghindari dependency animejs.
  */

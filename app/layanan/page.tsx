@@ -29,10 +29,10 @@ export default function ServicesPage() {
               <ArrowLeft size={16} /> Kembali ke Beranda
             </Link>
             <h1 className="font-display text-4xl font-extrabold text-navy sm:text-5xl dark:text-white mb-4">
-              Layanan & Program BPKY
+              Layanan & Program PKY
             </h1>
             <p className="text-lg text-text-secondary dark:text-white/70">
-              Berikut adalah daftar layanan kesehatan dan program pembinaan komprehensif yang disediakan oleh Biro Pusat Kesehatan Yudikatif.
+              Berikut adalah daftar layanan kesehatan dan program pembinaan komprehensif yang disediakan oleh Pusat Kesehatan Yustisial.
             </p>
           </div>
 

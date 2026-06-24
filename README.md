@@ -1,6 +1,6 @@
-# Portal MYKN — Majelis Yudikatif Kesehatan Nasional
+# Portal MYKN — Majelis yustisial kesehatan Nasional
 
-Landing page profil instansi pemerintah bertema **yudikatif kesehatan**
+Landing page profil instansi pemerintah bertema **yustisial kesehatan**
 (lembaga penegak etik & disiplin profesi kesehatan), dibangun dari nol dengan:
 
 - **Next.js 15** (App Router) + **TypeScript**
