@@ -15,79 +15,8 @@ export function FloatingParticles({
   count?: number;
   className?: string;
 }) {
-  const [isMounted, setIsMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const particles = React.useMemo(() => {
-    if (!isMounted) return [];
-    return Array.from({ length: count }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 6 + 3,
-      duration: Math.random() * 8 + 6,
-      delay: Math.random() * 4,
-      opacity: Math.random() * 0.25 + 0.05,
-      type: Math.random() > 0.6 ? "cross" : "circle",
-    }));
-  }, [count, isMounted]);
-
-  if (!isMounted) return null;
-
-  return (
-    <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className || ""}`}>
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute"
-          style={{
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            opacity: p.opacity,
-          }}
-          animate={{
-            y: [0, -20, 0, 15, 0],
-            x: [0, 8, -5, 3, 0],
-            rotate: p.type === "cross" ? [0, 90, 180, 270, 360] : [0, 0],
-          }}
-          transition={{
-            duration: p.duration,
-            delay: p.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          {p.type === "cross" ? (
-            <svg
-              width={p.size * 1.8}
-              height={p.size * 1.8}
-              viewBox="0 0 16 16"
-              fill="none"
-            >
-              <path
-                d="M8 2v12M2 8h12"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                className="text-primary/30"
-              />
-            </svg>
-          ) : (
-            <div
-              className="rounded-full bg-primary/20"
-              style={{
-                width: p.size,
-                height: p.size,
-              }}
-            />
-          )}
-        </motion.div>
-      ))}
-    </div>
-  );
+  // Dinonaktifkan sementara untuk meningkatkan performa (mengurangi lag)
+  return null;
 }
 
 /**
