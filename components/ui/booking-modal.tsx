@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, Calendar, Activity, ArrowRight, CheckCircle2 } from "lucide-react"
+import { X, MapPin, Activity, ArrowRight, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface BookingModalProps {
@@ -13,12 +13,20 @@ interface BookingModalProps {
 export function BookingModal({ isOpen, onClose }: BookingModalProps) {
   const [step, setStep] = React.useState(1)
 
-  // Reset step when closed
   React.useEffect(() => {
-    if (!isOpen) {
-      setTimeout(() => setStep(1), 300)
+    if (isOpen) {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.paddingRight = "0px";
+      document.body.style.overflow = "unset";
     }
-  }, [isOpen])
+    return () => {
+      document.body.style.paddingRight = "0px";
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   return (
     <AnimatePresence>
@@ -42,7 +50,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
               <div className="bg-surface-muted px-6 py-4 flex items-center justify-between border-b border-gray-100 dark:bg-navy dark:border-white/10">
                 <h3 className="font-display font-bold text-navy dark:text-white flex items-center gap-2">
                   <Activity size={18} className="text-primary" />
-                  Pendaftaran Layanan
+                  Pilih Fasilitas
                 </h3>
                 <button 
                   onClick={onClose}
@@ -70,9 +78,9 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                       exit={{ opacity: 0, x: -20 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <h4 className="text-lg font-bold text-navy dark:text-white mb-4">Pilih Jenis Layanan</h4>
+                      <h4 className="text-lg font-bold text-navy dark:text-white mb-4">Pilih Tipe Fasilitas</h4>
                       <div className="grid gap-3">
-                        {["Medical Check Up (MCU)", "Konsultasi Umum", "Pemeriksaan Gigi", "Konsultasi Psikologi"].map((item) => (
+                        {["Rumah Sakit Umum", "Rumah Sakit Khusus", "Klinik Pratama", "Klinik Utama"].map((item) => (
                           <button
                             key={item}
                             onClick={() => setStep(2)}
@@ -94,15 +102,15 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                       exit={{ opacity: 0, x: -20 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <h4 className="text-lg font-bold text-navy dark:text-white mb-4">Pilih Tanggal</h4>
+                      <h4 className="text-lg font-bold text-navy dark:text-white mb-4">Pilih Wilayah</h4>
                       <div className="grid grid-cols-2 gap-3 mb-6">
-                        {["Hari Ini", "Besok", "Lusa", "Pilih Kalender"].map((item, i) => (
+                        {["Sumatera", "Jawa & Bali", "Kalimantan", "Sulawesi & Timur", "Nusa Tenggara", "Papua & Maluku"].map((item, i) => (
                           <button
                             key={item}
                             onClick={() => setStep(3)}
-                            className={`p-3 rounded-xl border flex flex-col items-center justify-center gap-2 transition-colors ${i === 3 ? 'border-dashed border-gray-300 hover:border-primary text-text-muted dark:border-white/20' : 'border-gray-200 hover:border-primary hover:bg-primary-50 text-text-secondary dark:border-white/10 dark:hover:bg-primary/20 dark:text-white/80'}`}
+                            className={`p-3 rounded-xl border flex flex-col items-center justify-center gap-2 transition-colors border-gray-200 hover:border-primary hover:bg-primary-50 text-text-secondary dark:border-white/10 dark:hover:bg-primary/20 dark:text-white/80`}
                           >
-                            {i === 3 && <Calendar size={18} />}
+                            <MapPin size={18} />
                             <span className="font-medium text-sm">{item}</span>
                           </button>
                         ))}
@@ -123,9 +131,9 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                       <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4 dark:bg-green-900/30">
                         <CheckCircle2 size={32} className="text-green-600 dark:text-green-400" />
                       </div>
-                      <h4 className="text-xl font-bold text-navy dark:text-white mb-2">Jadwal Dikonfirmasi!</h4>
+                      <h4 className="text-xl font-bold text-navy dark:text-white mb-2">Permintaan Informasi Terkirim!</h4>
                       <p className="text-sm text-text-secondary dark:text-white/60 mb-8">
-                        Silakan periksa email kejaksaan Anda untuk detail pendaftaran dan antrean.
+                        Silakan periksa email kejaksaan Anda untuk mendapatkan direktori lengkap fasilitas di wilayah terkait.
                       </p>
                       <Button variant="primary" className="w-full" onClick={onClose}>
                         Selesai

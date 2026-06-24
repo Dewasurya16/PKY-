@@ -11,26 +11,26 @@ const photos = [
   {
     id: 1,
     url: "/image/gedung.png",
-    caption: "Fasad Depan Gedung BPKY",
-    desc: "Bangunan modern dengan fasilitas terintegrasi."
+    caption: "Kantor Pusat BPKY",
+    desc: "Pusat komando dan pembinaan seluruh fasilitas kesehatan Kejaksaan."
   },
   {
     id: 2,
-    url: "/image/gedung 2.png",
-    caption: "Ruang Konsultasi Medis",
-    desc: "Privasi dan kenyamanan pasien menjadi prioritas utama kami."
+    url: "/image/rumah_sakit.png",
+    caption: "Rumah Sakit Adhyaksa",
+    desc: "Fasilitas kesehatan rujukan utama dengan pelayanan komprehensif."
   },
   {
     id: 3,
-    url: "/image/gedung.png",
-    caption: "Fasilitas Lab Terpadu",
-    desc: "Peralatan medis canggih untuk akurasi diagnosa."
+    url: "/image/klinik.png",
+    caption: "Klinik Utama Adhyaksa",
+    desc: "Layanan rawat jalan prima yang tersebar di berbagai provinsi."
   },
   {
     id: 4,
     url: "/image/gedung 2.png",
-    caption: "Ambulans Gawat Darurat",
-    desc: "Siaga 24 jam dengan tim medis profesional."
+    caption: "Pusat Pengembangan Medis",
+    desc: "Fasilitas peningkatan kompetensi dan sertifikasi tenaga medis Kejaksaan."
   }
 ]
 
@@ -67,10 +67,10 @@ export function Gallery() {
     <section id="fasilitas" className="bg-surface-soft py-20 lg:py-32 dark:bg-navy-dark overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mb-12 flex flex-col items-center text-center">
-          <SectionTag align="center">Fasilitas Kami</SectionTag>
+          <SectionTag align="center">Fasilitas Binaan BPKY</SectionTag>
           <Reveal>
             <h2 className="mt-6 font-display text-3xl font-bold text-navy sm:text-4xl lg:text-5xl dark:text-white">
-              Layanan Medis <span className="gradient-text">Premium</span>
+              Jaringan <span className="gradient-text">Fasilitas Kejaksaan</span>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>

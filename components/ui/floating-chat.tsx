@@ -43,7 +43,7 @@ export function FloatingChat() {
                     CS
                   </div>
                   <div className="rounded-2xl rounded-bl-none bg-white p-3 text-sm text-text-secondary shadow-sm dark:bg-navy-dark dark:text-white/80">
-                    Halo! Ada yang bisa kami bantu terkait pelayanan kesehatan atau jadwal MCU hari ini?
+                    Halo! Ada yang bisa kami bantu terkait informasi fasilitas kesehatan, Klinik Adhyaksa, RS Adhyaksa, atau jadwal MCU hari ini?
                   </div>
                 </div>
               </div>

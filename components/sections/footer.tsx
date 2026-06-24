@@ -21,7 +21,7 @@ export function Footer() {
               </span>
             </a>
             <p className="mt-6 text-sm leading-relaxed text-text-secondary">
-              {site.tagline}. Kami berdedikasi menjaga kesehatan aparatur agar dapat bertugas secara maksimal untuk negeri.
+              {site.tagline}. Kami berdedikasi membina dan mengelola fasilitas kesehatan aparatur agar dapat bertugas secara maksimal untuk negeri.
             </p>
             
             <div className="mt-8 flex items-center gap-4">

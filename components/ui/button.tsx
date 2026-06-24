@@ -32,10 +32,11 @@ const sizeClasses: Record<Size, string> = {
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", size = "md", children, ...props }, ref) => {
+  ({ className, variant = "primary", size = "md", type = "button", children, ...props }, ref) => {
     return (
       <motion.button
         ref={ref}
+        type={type}
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.97 }}
         transition={{ type: "spring", stiffness: 400, damping: 20 }}

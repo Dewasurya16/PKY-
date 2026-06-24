@@ -6,6 +6,7 @@ import { ServiceCard } from "@/components/ui/cards";
 import { services } from "@/lib/site";
 import { Stethoscope, HeartPulse, Pill, Activity, ClipboardCheck, Ambulance } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const iconMap: Record<string, React.ElementType> = {
   Stethoscope,
@@ -21,9 +22,9 @@ export function Process() {
     <section id="layanan" className="bg-surface-muted py-24 lg:py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <SectionTag align="center">Layanan BPKY</SectionTag>
+          <SectionTag align="center">Fokus BPKY</SectionTag>
           <h2 className="mt-5 text-balance font-display text-3xl font-bold leading-tight text-navy sm:text-4xl">
-            Layanan kesehatan komprehensif untuk aparatur kejaksaan
+            Pembinaan fasilitas kesehatan komprehensif untuk aparatur kejaksaan
           </h2>
         </Reveal>
 
@@ -49,9 +50,11 @@ export function Process() {
         </Stagger>
 
         <Reveal delay={0.2} className="mt-12 text-center">
-          <Button variant="outline" size="lg">
-            Lihat Semua Layanan
-          </Button>
+          <Link href="/layanan">
+            <Button variant="outline" size="lg">
+              Lihat Semua Layanan
+            </Button>
+          </Link>
         </Reveal>
       </div>
     </section>

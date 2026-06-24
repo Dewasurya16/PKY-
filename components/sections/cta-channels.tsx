@@ -27,22 +27,22 @@ export function CtaChannels() {
           <div className="relative z-10 w-full md:w-3/5 text-center md:text-left">
             <Reveal>
               <h2 className="text-balance font-display text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-                Pilih paket layanan kesehatan yang sesuai untuk Anda
+                Temukan informasi fasilitas kesehatan Kejaksaan
               </h2>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-blue-100/80 mx-auto md:mx-0">
-                Akses layanan kesehatan komprehensif dari MCU hingga telemedicine eksklusif untuk aparatur Kejaksaan RI.
+                Akses pusat informasi Klinik dan Rumah Sakit Adhyaksa, pengawasan, serta program kesehatan bagi aparatur Kejaksaan RI.
               </p>
             </Reveal>
 
             <Reveal delay={0.2} className="mt-8 flex flex-wrap justify-center md:justify-start gap-4 sm:gap-6 text-sm text-blue-50/90 font-medium">
               <span className="flex items-center gap-2">
-                <CheckCircle2 size={18} className="text-primary-light" /> Konsultasi 24/7
+                <CheckCircle2 size={18} className="text-primary-light" /> Jaringan RS Adhyaksa
               </span>
               <span className="flex items-center gap-2">
-                <CheckCircle2 size={18} className="text-primary-light" /> Dokter Spesialis
+                <CheckCircle2 size={18} className="text-primary-light" /> Klinik di 34 Provinsi
               </span>
               <span className="flex items-center gap-2">
-                <CheckCircle2 size={18} className="text-primary-light" /> Pengiriman Obat
+                <CheckCircle2 size={18} className="text-primary-light" /> Standar Mutu Terjamin
               </span>
             </Reveal>
 
@@ -53,7 +53,7 @@ export function CtaChannels() {
                 className="w-full sm:w-auto text-navy-dark shadow-[0_0_20px_rgba(245,158,11,0.3)]"
                 onClick={() => setIsModalOpen(true)}
               >
-                Mulai Pendaftaran
+                Cari Fasilitas Kesehatan
               </Button>
               <Button variant="outline" size="xl" className="w-full sm:w-auto text-white border-white/20 hover:bg-white/10 dark:text-white dark:border-white/20 dark:hover:bg-white/10">
                 Hubungi Bantuan

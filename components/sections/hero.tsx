@@ -17,13 +17,18 @@ import { JusticeHeartbeatMark } from "@/components/ui/justice-mark";
 import { CountUp } from "@/components/ui/count-up";
 import { FloatingParticles } from "@/components/ui/particles-bg";
 import * as React from "react";
+import { useState } from "react";
 import { BookingModal } from "@/components/ui/booking-modal";
 import { SearchScheduleModal } from "@/components/ui/search-schedule-modal";
 import { site } from "@/lib/site";
 
 export function Hero() {
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [isSearchModalOpen, setIsSearchModalOpen] = React.useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+
+  const [province, setProvince] = useState("");
+  const [city, setCity] = useState("");
+  const [facilityType, setFacilityType] = useState("");
 
   return (
     <section
@@ -59,9 +64,9 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.1 }}
               className="mt-7 max-w-xl text-balance font-display text-4xl font-extrabold leading-[1.1] text-navy sm:text-5xl lg:text-[3.5rem] dark:text-white"
             >
-              Melayani{" "}
-              <span className="gradient-text">Kesehatan</span>{" "}
-              Aparatur Kejaksaan dengan{" "}
+              Pusat Pengendali{" "}
+              <span className="gradient-text">Fasilitas Kesehatan</span>{" "}
+              Aparatur Kejaksaan secara{" "}
               <span className="relative inline-block">
                 Profesional
                 <svg
@@ -86,8 +91,8 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="mt-6 max-w-lg text-base leading-relaxed text-text-secondary sm:text-lg dark:text-white/70"
             >
-              {site.fullName} ({site.shortName}) menyediakan pelayanan kesehatan
-              terpadu, modern, dan berstandar tinggi bagi seluruh aparatur di
+              {site.fullName} ({site.shortName}) merupakan biro pusat yang membawahi,
+              mengawasi, dan membina Klinik serta Rumah Sakit Adhyaksa di seluruh
               lingkungan {site.institution}.
             </motion.p>
 
@@ -102,7 +107,7 @@ export function Hero() {
                 size="lg"
                 onClick={() => setIsModalOpen(true)}
               >
-                Layanan Kesehatan <ArrowRight size={17} />
+                Direktori Fasilitas <ArrowRight size={17} />
               </Button>
               <Button
                 variant="outline"
@@ -120,22 +125,26 @@ export function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.5 }}
-              className="mt-10 flex items-center gap-5 text-sm text-text-secondary dark:text-white/60"
+              className="mt-10 flex flex-wrap items-center gap-4 text-sm font-semibold text-navy dark:text-white"
             >
-              <span className="flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-primary" />
-                Independen
-              </span>
-              <span className="h-4 w-px bg-gray-200 dark:bg-white/10" />
-              <span className="flex items-center gap-2">
-                <ShieldCheck size={16} className="text-primary" />
-                Terpercaya
-              </span>
-              <span className="h-4 w-px bg-gray-200 dark:bg-white/10" />
-              <span className="flex items-center gap-2">
-                <Stethoscope size={16} className="text-primary" />
-                Profesional
-              </span>
+              <div className="flex items-center gap-2.5 rounded-full bg-white px-4 py-2 shadow-sm border border-gray-100 transition-transform hover:-translate-y-1 dark:bg-navy-dark dark:border-white/10">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary dark:bg-primary/20">
+                  <CheckCircle2 size={14} />
+                </div>
+                <span>Independen</span>
+              </div>
+              <div className="flex items-center gap-2.5 rounded-full bg-white px-4 py-2 shadow-sm border border-gray-100 transition-transform hover:-translate-y-1 dark:bg-navy-dark dark:border-white/10">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-teal-500/10 text-teal-600 dark:bg-teal-500/20 dark:text-teal-400">
+                  <ShieldCheck size={14} />
+                </div>
+                <span>Terpercaya</span>
+              </div>
+              <div className="flex items-center gap-2.5 rounded-full bg-white px-4 py-2 shadow-sm border border-gray-100 transition-transform hover:-translate-y-1 dark:bg-navy-dark dark:border-white/10">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400">
+                  <Stethoscope size={14} />
+                </div>
+                <span>Profesional</span>
+              </div>
             </motion.div>
           </div>
 
@@ -239,44 +248,65 @@ export function Hero() {
           className="relative z-20 mx-auto mt-12 max-w-4xl lg:mt-16"
         >
           <div className="flex flex-col gap-3 rounded-2xl border border-gray-100 bg-white p-3 shadow-card-lg sm:flex-row sm:items-center sm:gap-2 lg:rounded-full lg:p-2 dark:bg-navy dark:border-white/10 dark:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.5)]">
-            <button 
-              onClick={() => setIsSearchModalOpen(true)}
-              className="flex flex-1 items-center gap-2 rounded-xl px-4 py-2.5 transition-colors hover:bg-surface-soft text-left lg:rounded-full dark:hover:bg-white/5"
-            >
+            <div className="flex flex-1 items-center gap-2 rounded-xl px-4 py-2.5 transition-colors hover:bg-surface-soft text-left lg:rounded-full dark:hover:bg-white/5 relative">
               <MapPin size={18} className="flex-shrink-0 text-primary" />
-              <div>
+              <div className="flex-1 w-full">
                 <p className="text-[10px] font-semibold uppercase tracking-wider text-text-muted dark:text-white/40">
-                  Wilayah
+                  Provinsi
                 </p>
-                <p className="text-sm text-text-secondary dark:text-white/80">Pilih satuan kerja</p>
+                <select 
+                  className="w-full appearance-none bg-transparent text-sm text-text-secondary dark:text-white/80 focus:outline-none cursor-pointer"
+                  value={province}
+                  onChange={(e) => setProvince(e.target.value)}
+                >
+                  <option value="">Semua Provinsi</option>
+                  <option value="Jakarta">DKI Jakarta</option>
+                  <option value="Banten">Banten</option>
+                  <option value="Jawa Timur">Jawa Timur</option>
+                </select>
               </div>
-            </button>
+            </div>
             <span className="hidden h-8 w-px bg-gray-200 sm:block dark:bg-white/10" />
-            <button 
-              onClick={() => setIsSearchModalOpen(true)}
-              className="flex flex-1 items-center gap-2 rounded-xl px-4 py-2.5 transition-colors hover:bg-surface-soft text-left lg:rounded-full dark:hover:bg-white/5"
-            >
+            
+            <div className="flex flex-1 items-center gap-2 rounded-xl px-4 py-2.5 transition-colors hover:bg-surface-soft text-left lg:rounded-full dark:hover:bg-white/5 relative">
+              <MapPin size={18} className="flex-shrink-0 text-primary" />
+              <div className="flex-1 w-full">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-text-muted dark:text-white/40">
+                  Kota / Kabupaten
+                </p>
+                <select 
+                  className="w-full appearance-none bg-transparent text-sm text-text-secondary dark:text-white/80 focus:outline-none cursor-pointer"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                >
+                  <option value="">Semua Kota/Kab</option>
+                  <option value="Jakarta Timur">Jakarta Timur</option>
+                  <option value="Serang">Serang</option>
+                  <option value="Surabaya">Surabaya</option>
+                </select>
+              </div>
+            </div>
+            <span className="hidden h-8 w-px bg-gray-200 sm:block dark:bg-white/10" />
+            
+            <div className="flex flex-1 items-center gap-2 rounded-xl px-4 py-2.5 transition-colors hover:bg-surface-soft text-left lg:rounded-full dark:hover:bg-white/5 relative">
               <Stethoscope size={18} className="flex-shrink-0 text-primary" />
-              <div>
+              <div className="flex-1 w-full">
                 <p className="text-[10px] font-semibold uppercase tracking-wider text-text-muted dark:text-white/40">
-                  Layanan
+                  Fasilitas
                 </p>
-                <p className="text-sm text-text-secondary dark:text-white/80">Jenis layanan</p>
+                <select 
+                  className="w-full appearance-none bg-transparent text-sm text-text-secondary dark:text-white/80 focus:outline-none cursor-pointer"
+                  value={facilityType}
+                  onChange={(e) => setFacilityType(e.target.value)}
+                >
+                  <option value="">Semua Fasilitas</option>
+                  <option value="Rumah Sakit Umum">Rumah Sakit Umum</option>
+                  <option value="Rumah Sakit Khusus">Rumah Sakit Khusus</option>
+                  <option value="Klinik Pratama">Klinik Pratama</option>
+                  <option value="Klinik Utama">Klinik Utama</option>
+                </select>
               </div>
-            </button>
-            <span className="hidden h-8 w-px bg-gray-200 sm:block dark:bg-white/10" />
-            <button 
-              onClick={() => setIsSearchModalOpen(true)}
-              className="flex flex-1 items-center gap-2 rounded-xl px-4 py-2.5 transition-colors hover:bg-surface-soft text-left lg:rounded-full dark:hover:bg-white/5"
-            >
-              <Calendar size={18} className="flex-shrink-0 text-primary" />
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-text-muted dark:text-white/40">
-                  Jadwal
-                </p>
-                <p className="text-sm text-text-secondary dark:text-white/80">Pilih tanggal</p>
-              </div>
-            </button>
+            </div>
             <Button
               variant="primary"
               size="lg"
@@ -284,14 +314,18 @@ export function Hero() {
               className="sm:aspect-square sm:px-0 lg:aspect-auto lg:px-7"
             >
               <Search size={18} />
-              <span className="sm:hidden lg:inline">Cari Layanan</span>
+              <span className="sm:hidden lg:inline">Cari Lokasi</span>
             </Button>
           </div>
         </motion.div>
       </div>
 
       <BookingModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-      <SearchScheduleModal isOpen={isSearchModalOpen} onClose={() => setIsSearchModalOpen(false)} />
+      <SearchScheduleModal 
+        isOpen={isSearchModalOpen} 
+        onClose={() => setIsSearchModalOpen(false)} 
+        filters={{ province, city, type: facilityType }}
+      />
 
       {/* Bottom wave */}
       <div className="wave-bg">

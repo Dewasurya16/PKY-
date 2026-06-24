@@ -6,24 +6,24 @@ import { UserCheck, CalendarDays, Stethoscope, FileCheck2 } from "lucide-react";
 
 const steps = [
   {
-    title: "Pendaftaran Online",
-    desc: "Aparatur mendaftar melalui portal web BPKY dan memilih jadwal.",
-    icon: CalendarDays,
+    title: "Standarisasi Mutu",
+    desc: "Menetapkan standar operasional pelayanan medis di seluruh Klinik dan RS Adhyaksa.",
+    icon: FileCheck2,
   },
   {
-    title: "Verifikasi Berkas",
-    desc: "Sistem melakukan verifikasi data kepegawaian secara otomatis.",
-    icon: UserCheck,
-  },
-  {
-    title: "Pemeriksaan Medis",
-    desc: "Pemeriksaan langsung oleh tenaga medis profesional di klinik BPKY.",
+    title: "Pengawasan Layanan",
+    desc: "Memastikan seluruh fasilitas kesehatan Adhyaksa berjalan sesuai dengan regulasi.",
     icon: Stethoscope,
   },
   {
-    title: "Hasil & Rekam Medis",
-    desc: "Hasil rekam medis dan resep obat dapat diakses secara digital.",
-    icon: FileCheck2,
+    title: "Sertifikasi Tenaga Medis",
+    desc: "Verifikasi kompetensi dan kelayakan praktik bagi dokter dan staf medis.",
+    icon: UserCheck,
+  },
+  {
+    title: "Evaluasi Berkala",
+    desc: "Melakukan penilaian rutin untuk meningkatkan kualitas fasilitas kesehatan aparatur.",
+    icon: CalendarDays,
   },
 ];
 
@@ -32,10 +32,10 @@ export function Workflow() {
     <section id="proses" className="relative overflow-hidden bg-white py-24 lg:py-32 dark:bg-navy-dark">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mb-16 flex flex-col items-center text-center">
-          <SectionTag align="center">Proses & Alur</SectionTag>
+          <SectionTag align="center">Peran BPKY</SectionTag>
           <Reveal>
             <h2 className="mt-5 max-w-2xl text-balance font-display text-3xl font-bold leading-tight text-navy sm:text-4xl dark:text-white">
-              Alur Layanan Kesehatan BPKY
+              Siklus Pembinaan Fasilitas Kesehatan
             </h2>
           </Reveal>
         </div>

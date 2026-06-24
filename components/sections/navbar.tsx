@@ -6,6 +6,7 @@ import { Menu, X, Heart, Phone, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { navLinks, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
@@ -53,7 +54,7 @@ export function Navbar() {
         >
           <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-10">
             {/* Logo */}
-            <a href="#beranda" className="flex items-center gap-3">
+            <Link href="/#beranda" className="flex items-center gap-3">
               <img src="/image/logo.png" alt="Logo Kejaksaan" className="h-10 w-auto object-contain drop-shadow-sm" />
               <span className="flex flex-col leading-none">
                 <span className="font-display text-lg font-bold text-navy dark:text-white">
@@ -63,19 +64,19 @@ export function Navbar() {
                   {site.institution}
                 </span>
               </span>
-            </a>
+            </Link>
 
             {/* Desktop links */}
             <div className="hidden items-center gap-1 lg:flex">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
                   className="group relative rounded-lg px-3.5 py-2 text-sm font-medium text-text-secondary transition-colors hover:text-primary dark:text-white/70 dark:hover:text-primary-light"
                 >
                   {link.label}
                   <span className="absolute inset-x-2 -bottom-0.5 h-0.5 scale-x-0 rounded-full bg-primary transition-transform duration-300 group-hover:scale-x-100 dark:bg-primary-light" />
-                </a>
+                </Link>
               ))}
               <div className="ml-2 pl-2 border-l border-gray-200 dark:border-white/10">
                 <ThemeToggle />
@@ -118,14 +119,14 @@ export function Navbar() {
             >
               <div className="flex flex-col gap-1 px-6 pb-6 pt-3">
                 {navLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
                     className="rounded-xl px-4 py-3 text-sm font-medium text-text-secondary transition-colors hover:bg-primary-50 hover:text-primary"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 ))}
                 <Button
                   variant="primary"
