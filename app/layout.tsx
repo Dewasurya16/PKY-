@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import dynamic from "next/dynamic";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { ThemeProvider } from "@/components/theme-provider";
-import { FloatingChat } from "@/components/ui/FloatingChat";
-import { ScrollToTop } from "@/components/ui/ScrollToTop";
+
+// Lazy load widgets
+const FloatingChat = dynamic(() => import("@/components/ui/FloatingChat").then(mod => mod.FloatingChat));
+const ScrollToTop = dynamic(() => import("@/components/ui/ScrollToTop").then(mod => mod.ScrollToTop));
 
 const jakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],

@@ -2,6 +2,8 @@
 
 import * as React from "react";
 import { useState } from "react";
+import Image from "next/image";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -19,8 +21,8 @@ import { JusticeHeartbeatMark } from "@/components/ui/JusticeMark";
 import { CountUp } from "@/components/ui/CountUp";
 import { FloatingParticles } from "@/components/ui/ParticlesBg";
 
-import { BookingModal } from "@/components/ui/BookingModal";
-import { SearchScheduleModal } from "@/components/ui/SearchScheduleModal";
+const BookingModal = dynamic(() => import("@/components/ui/BookingModal").then(mod => mod.BookingModal), { ssr: false });
+const SearchScheduleModal = dynamic(() => import("@/components/ui/SearchScheduleModal").then(mod => mod.SearchScheduleModal), { ssr: false });
 import { site } from "@/lib/site";
 
 export function Hero() {
@@ -171,10 +173,13 @@ export function Hero() {
                   WebkitMaskImage: 'radial-gradient(circle, black 30%, rgba(0,0,0,0.8) 50%, transparent 72%)' 
                 }}
               >
-                <img 
+                <Image 
                   src="/image/gedung.png" 
                   alt="Gedung Kejaksaan" 
-                  className="w-full h-full object-cover opacity-60 mix-blend-multiply dark:mix-blend-lighten" 
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 500px"
+                  className="object-cover opacity-60 mix-blend-multiply dark:mix-blend-lighten" 
                 />
               </div>
             </motion.div>
@@ -186,9 +191,12 @@ export function Hero() {
               transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100 }}
               className="relative z-10 w-full max-w-[280px] sm:max-w-[340px] lg:max-w-[400px] flex justify-center"
             >
-              <img 
+              <Image 
                 src="/image/jaksa1.png" 
-                alt="Jaksa Profesional" 
+                alt="Jaksa Profesional"
+                width={400}
+                height={520}
+                priority
                 className="w-auto h-auto max-h-[520px] object-contain drop-shadow-[0_20px_40px_rgba(27,58,92,0.15)] dark:drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]" 
               />
             </motion.div>
