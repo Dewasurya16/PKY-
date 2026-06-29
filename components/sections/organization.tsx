@@ -1,7 +1,7 @@
 "use client";
 
-import { SectionTag } from "@/components/ui/Badge";
-import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
+import { SectionTag } from "@/components/ui/badge";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
 import { orgMembers } from "@/lib/site";
 import { UserCheck } from "lucide-react";
 import Image from "next/image"; // In a real app we'd use Next Image, here we'll use a placeholder div or img

@@ -3,7 +3,7 @@
 import * as React from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, MapPin, Activity, ArrowRight, CheckCircle2 } from "lucide-react"
-import { Button } from "@/components/ui/Button"
+import { Button } from "@/components/ui/button"
 
 interface BookingModalProps {
   isOpen: boolean

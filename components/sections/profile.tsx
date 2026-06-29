@@ -1,8 +1,8 @@
 "use client";
 
-import { SectionTag } from "@/components/ui/Badge";
-import { Reveal } from "@/components/ui/Motion";
-import { Tabs } from "@/components/ui/Motion";
+import { SectionTag } from "@/components/ui/badge";
+import { Reveal } from "@/components/ui/motion";
+import { Tabs } from "@/components/ui/motion";
 import { profileTabs, site } from "@/lib/site";
 import { Play, Shield, Award, Clock } from "lucide-react";
 

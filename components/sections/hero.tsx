@@ -13,8 +13,8 @@ import {
   CheckCircle2,
   Star,
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { JusticeHeartbeatMark } from "@/components/ui/JusticeMark";
 import { CountUp } from "@/components/ui/CountUp";
 import { FloatingParticles } from "@/components/ui/ParticlesBg";

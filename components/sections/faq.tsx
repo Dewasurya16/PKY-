@@ -1,8 +1,8 @@
 "use client";
 
-import { SectionTag } from "@/components/ui/Badge";
-import { Reveal } from "@/components/ui/Motion";
-import { Accordion } from "@/components/ui/Accordion";
+import { SectionTag } from "@/components/ui/badge";
+import { Reveal } from "@/components/ui/motion";
+import { Accordion } from "@/components/ui/accordion";
 import { faqItems } from "@/lib/site";
 import { MessageCircleQuestion } from "lucide-react";
 
