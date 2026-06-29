@@ -1,85 +1,56 @@
-# Portal MYKN — Majelis yustisial kesehatan Nasional
+# Pusat Kesehatan Yustisial (PKY) — Kejaksaan RI
 
-Landing page profil instansi pemerintah bertema **yustisial kesehatan**
-(lembaga penegak etik & disiplin profesi kesehatan), dibangun dari nol dengan:
+Portal resmi Pusat Kesehatan Yustisial (PKY) Kejaksaan Republik Indonesia. Membina dan mengelola layanan kesehatan aparatur kejaksaan secara profesional, modern, dan terpercaya.
 
-- **Next.js 15** (App Router) + **TypeScript**
-- **Tailwind CSS** dengan token desain kustom (warna navy/teal/gold bertema
-  kesehatan + kewibawaan hukum)
-- **Framer Motion** — animasi scroll-reveal, stagger, hover, transisi tab/menu
-- **anime.js** — animasi angka statistik (count-up) dan goresan SVG "draw-in"
-  pada lambang denyut-kesehatan + timbangan keadilan di Hero
-- Komponen UI bergaya **Nyxhora UI** (ShinyCard, MagicCard, Badge, Accordion,
-  Tabs, Button) yang ditulis ulang sendiri dengan Tailwind + Radix-style
-  pattern agar tidak menyalin source proprietary apa pun
+## 🚀 Teknologi Utama
 
-> **Catatan:** "MYKN" dan seluruh data (nama pejabat, statistik, alamat)
-> adalah **contoh/placeholder** untuk keperluan template — silakan ganti
-> sesuai instansi Anda yang sebenarnya.
+Proyek ini dibangun menggunakan arsitektur frontend statis yang modern dan optimal:
+- **Framework:** [Next.js 15.5](https://nextjs.org/) (App Router)
+- **UI Library:** [React 18](https://react.dev/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Animasi:** [Framer Motion](https://www.framer.com/motion/)
+- **Carousel:** [Embla Carousel](https://www.embla-carousel.com/)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Validation:** [Zod](https://zod.dev/)
 
-## Menjalankan secara lokal
+## ⚡ Fitur Utama & Optimasi Performa
 
-```bash
-npm install
-npm run dev
-```
+Beranda situs ini terdiri dari berbagai seksi interaktif (Hero, Statistik, Profil, Galeri Fasilitas, Berita, FAQ, dll). 
+Untuk memastikan pengalaman *First Contentful Paint* (FCP) dan *Time to Interactive* (TTI) yang secepat kilat (terutama di perangkat mobile via Vercel), proyek ini telah dioptimasi secara khusus:
 
-Buka `http://localhost:3000`.
+1. **Lazy Loading Komponen Cerdas (`next/dynamic`)**
+   - Komponen berat (seperti Galeri Carousel) dan elemen *below the fold* (di bawah pandangan layar pertama) ditunda pemuatannya.
+   - Komponen widget (*FloatingChat*, *ScrollToTop*) dan modal dinamis dieksekusi secara asinkron tanpa memblokir benang utama browser.
+2. **Optimasi LCP (*Largest Contentful Paint*)**
+   - Aset visual utama pada elemen Hero diload menggunakan komponen `<Image>` Next.js lengkap dengan artibut `priority` dan `sizes` untuk render instan.
 
-Untuk build produksi:
+## 🛠️ Cara Menjalankan Secara Lokal
 
-```bash
-npm run build
-npm run start
-```
+1. **Clone repository ini** (jika belum) dan masuk ke dalam folder proyek.
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+3. **Jalankan Development Server:**
+   ```bash
+   npm run dev
+   ```
+   Akses `http://localhost:3000` di browser Anda.
 
-## Struktur proyek
+4. **Build untuk Production:**
+   ```bash
+   npm run build
+   npm run start
+   ```
 
-```
-app/
-  layout.tsx        # root layout + metadata
-  page.tsx           # merangkai seluruh section
-  globals.css        # base style + utilitas (shiny-card, magic-card, dst)
-components/
-  ui/                # primitives ala Nyxhora UI (button, badge, cards, dst)
-  sections/          # navbar, hero, stats, profil, proses, organisasi,
-                      # berita, cta, faq, footer
-lib/
-  site.ts            # SEMUA konten teks & data — edit di sini untuk ganti
-                      # nama instansi, statistik, anggota majelis, dst.
-  utils.ts           # helper cn() dan formatNumberID()
-```
+## 📂 Struktur Direktori Utama
 
-## Mengubah konten
+- `/app` - Rute aplikasi (Next.js App Router). Mengandung halaman Beranda (`page.tsx`) dan tata letak akar (`layout.tsx`).
+- `/components/sections` - Bagian-bagian modular halaman utama (Hero, Profil, Galeri, dll).
+- `/components/ui` - Komponen antarmuka dasar yang bisa digunakan kembali (Button, Badge, Modal, dsb).
+- `/lib` - File utilitas, termasuk `site.ts` yang berisi konfigurasi data statis (informasi lembaga, FAQ, berita, fasilitas kesehatan).
+- `/public` - Aset statis berupa gambar (`/image/`) dan logo.
 
-Hampir seluruh teks (nama instansi, alamat, statistik, tahapan sidang,
-anggota majelis, berita, FAQ) terpusat di **`lib/site.ts`** — cukup edit
-file itu tanpa menyentuh komponen.
+---
+*Portal ini dideploy secara berkesinambungan di infrastruktur Vercel untuk memberikan akses yang cepat dan reliabel dari seluruh wilayah Indonesia.*
 
-## Mengganti font (opsional, untuk produksi)
-
-Proyek ini memakai font-stack sistem secara default agar bisa langsung
-di-build tanpa koneksi internet. Untuk tampilan final yang lebih khas,
-tambahkan font asli via `next/font/google` di `app/layout.tsx`, misalnya:
-
-```tsx
-import { Fraunces, Plus_Jakarta_Sans, IBM_Plex_Mono } from "next/font/google";
-
-const fraunces = Fraunces({ subsets: ["latin"], variable: "--font-display" });
-const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans" });
-```
-
-Lalu tambahkan `variable` tersebut ke `fontFamily` pada `tailwind.config.ts`.
-
-## Menghubungkan formulir pengaduan ke backend
-
-Tombol "Ajukan Pengaduan" dan kartu kanal pengaduan saat ini bersifat UI
-saja (scroll ke section kontak). Untuk produksi, hubungkan ke:
-- API/Endpoint pengaduan instansi Anda, atau
-- Form builder (Google Forms/Tally) yang di-embed, atau
-- Integrasi WhatsApp Business API untuk kanal WhatsApp resmi.
-
-## Deploy
-
-Proyek ini bisa dideploy ke Vercel, atau platform Node.js apa pun yang
-mendukung Next.js (jalankan `npm run build` lalu `npm run start`).
