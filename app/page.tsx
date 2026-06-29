@@ -1,16 +1,16 @@
-import { Navbar } from "@/components/sections/navbar";
-import { Hero } from "@/components/sections/hero";
-import { StatsStrip } from "@/components/sections/stats-strip";
-import { Profile } from "@/components/sections/profile";
-import { Workflow } from "@/components/sections/workflow";
-import { Process } from "@/components/sections/process";
-import { Gallery } from "@/components/sections/gallery";
-import { Organization } from "@/components/sections/organization";
-import { Transparency } from "@/components/sections/transparency";
-import { News } from "@/components/sections/news";
-import { CtaChannels } from "@/components/sections/cta-channels";
-import { Faq } from "@/components/sections/faq";
-import { Footer } from "@/components/sections/footer";
+import { Navbar } from "@/components/sections/Navbar";
+import { Hero } from "@/components/sections/Hero";
+import { StatsStrip } from "@/components/sections/StatsStrip";
+import { Profile } from "@/components/sections/Profile";
+import { Workflow } from "@/components/sections/Workflow";
+import { Process } from "@/components/sections/Process";
+import { Gallery } from "@/components/sections/Gallery";
+import { Organization } from "@/components/sections/Organization";
+import { Transparency } from "@/components/sections/Transparency";
+import { News } from "@/components/sections/News";
+import { CtaChannels } from "@/components/sections/CtaChannels";
+import { Faq } from "@/components/sections/Faq";
+import { Footer } from "@/components/sections/Footer";
 
 export default function HomePage() {
   return (

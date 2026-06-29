@@ -1,8 +1,8 @@
 "use client";
 
-import { SectionTag } from "@/components/ui/badge";
-import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
-import { Button } from "@/components/ui/button";
+import { SectionTag } from "@/components/ui/Badge";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
+import { Button } from "@/components/ui/Button";
 import { FileText, Download, ShieldAlert, MessageSquare, ExternalLink, FileDown } from "lucide-react";
 
 const downloads = [

@@ -3,12 +3,12 @@
 import * as React from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { Menu, X, Heart, Phone, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { navLinks, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false);
@@ -44,13 +44,19 @@ export function Navbar() {
       <header className="sticky top-0 z-40">
         <motion.div
           animate={{
-            backgroundColor: scrolled ? "rgba(var(--bg-nav), 0.95)" : "rgba(var(--bg-nav), 1)",
+            y: 0,
             boxShadow: scrolled
               ? "0 1px 0 rgba(0,0,0,0.04), 0 4px 16px -4px rgba(0,0,0,0.08)"
-              : "0 1px 0 rgba(0,0,0,0.04)",
+              : "0 1px 0 rgba(0,0,0,0)",
           }}
           transition={{ duration: 0.3 }}
-          className="backdrop-blur-md bg-white dark:bg-navy-dark dark:shadow-none dark:border-b dark:border-white/10"
+          className={cn(
+            "backdrop-blur-md border-b transition-colors duration-300",
+            scrolled 
+              ? "bg-white/95 border-gray-100 dark:bg-navy-dark/95 dark:border-white/10" 
+              : "bg-white border-transparent dark:bg-navy-dark dark:border-transparent",
+            "dark:shadow-none"
+          )}
         >
           <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 lg:px-10">
             {/* Logo */}

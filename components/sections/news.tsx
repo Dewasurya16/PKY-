@@ -1,10 +1,10 @@
 "use client";
 
 import { ArrowRight, Calendar } from "lucide-react";
-import { SectionTag, Badge } from "@/components/ui/badge";
-import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
+import { SectionTag, Badge } from "@/components/ui/Badge";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
 import { newsItems } from "@/lib/site";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 
 export function News() {

@@ -4,7 +4,7 @@ import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, MapPin, Calendar, Clock, Stethoscope } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Button } from "./button";
+import { Button } from "./Button";
 import { facilitiesData } from "@/lib/site";
 
 interface SearchScheduleModalProps {

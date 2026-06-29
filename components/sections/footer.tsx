@@ -1,6 +1,7 @@
 import { Heart, MapPin, Mail, Phone, ArrowRight } from "lucide-react";
 import { site, navLinks } from "@/lib/site";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
+import NewsletterForm from "@/components/ui/NewsletterForm";
 
 export function Footer() {
   return (
@@ -87,16 +88,7 @@ export function Footer() {
 
             <div className="mt-8">
               <h5 className="text-xs font-bold uppercase tracking-wider text-text-muted mb-3">Newsletter</h5>
-              <div className="flex gap-2">
-                <input 
-                  type="email" 
-                  placeholder="Alamat email" 
-                  className="w-full rounded-xl border border-gray-200 bg-surface-muted px-4 py-2.5 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary"
-                />
-                <Button variant="primary" className="px-4 shrink-0 rounded-xl">
-                  <ArrowRight size={16} />
-                </Button>
-              </div>
+              <NewsletterForm />
             </div>
           </div>
         </div>

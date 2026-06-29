@@ -14,7 +14,7 @@ export function ShinyCard({
   return (
     <div
       className={cn(
-        "shiny-card hover-lift rounded-2xl border border-gray-100 bg-white p-6 shadow-card",
+        "shiny-card hover-lift rounded-2xl border border-gray-100 bg-white p-6 shadow-card dark:bg-navy dark:border-white/10 dark:shadow-none",
         className
       )}
     >
@@ -46,7 +46,7 @@ export function MagicCard({
       ref={ref}
       onMouseMove={handleMouseMove}
       className={cn(
-        "magic-card hover-lift rounded-2xl border border-gray-100 bg-white p-6 shadow-card",
+        "magic-card hover-lift rounded-2xl border border-gray-100 bg-white p-6 shadow-card dark:bg-navy dark:border-white/10 dark:shadow-none",
         className
       )}
     >
@@ -66,7 +66,7 @@ export function GlassCard({
   return (
     <div
       className={cn(
-        "glass-card rounded-2xl p-6",
+        "glass-card rounded-2xl p-6 dark:glass-card-dark",
         className
       )}
     >
@@ -88,8 +88,8 @@ export function ServiceCard({
   return (
     <div
       className={cn(
-        "group hover-lift rounded-2xl border border-gray-100 bg-white p-7 shadow-card transition-all duration-300",
-        "hover:border-primary/20",
+        "group hover-lift rounded-2xl border border-gray-100 bg-white p-7 shadow-card transition-all duration-300 dark:bg-navy dark:border-white/10 dark:shadow-none",
+        "hover:border-primary/20 dark:hover:border-primary/40",
         className
       )}
     >

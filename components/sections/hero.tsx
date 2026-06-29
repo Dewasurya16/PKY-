@@ -1,5 +1,7 @@
 "use client";
 
+import * as React from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -11,15 +13,14 @@ import {
   CheckCircle2,
   Star,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { JusticeHeartbeatMark } from "@/components/ui/justice-mark";
-import { CountUp } from "@/components/ui/count-up";
-import { FloatingParticles } from "@/components/ui/particles-bg";
-import * as React from "react";
-import { useState } from "react";
-import { BookingModal } from "@/components/ui/booking-modal";
-import { SearchScheduleModal } from "@/components/ui/search-schedule-modal";
+import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
+import { JusticeHeartbeatMark } from "@/components/ui/JusticeMark";
+import { CountUp } from "@/components/ui/CountUp";
+import { FloatingParticles } from "@/components/ui/ParticlesBg";
+
+import { BookingModal } from "@/components/ui/BookingModal";
+import { SearchScheduleModal } from "@/components/ui/SearchScheduleModal";
 import { site } from "@/lib/site";
 
 export function Hero() {
@@ -329,10 +330,9 @@ export function Hero() {
 
       {/* Bottom wave */}
       <div className="wave-bg">
-        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="fill-surface-muted dark:fill-navy-dark">
           <path
             d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z"
-            fill="#F8FAFB"
           />
         </svg>
       </div>

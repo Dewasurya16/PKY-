@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
+import { ThemeProvider } from "@/components/theme-provider";
+import { FloatingChat } from "@/components/ui/FloatingChat";
+import { ScrollToTop } from "@/components/ui/ScrollToTop";
 
 const jakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -32,8 +35,7 @@ export const metadata: Metadata = {
   authors: [{ name: site.institution }],
 };
 
-import { ThemeProvider } from "@/components/theme-provider";
-import { FloatingChat } from "@/components/ui/floating-chat";
+
 
 export default function RootLayout({
   children,
@@ -51,6 +53,7 @@ export default function RootLayout({
         >
           {children}
           <FloatingChat />
+          <ScrollToTop />
         </ThemeProvider>
       </body>
     </html>

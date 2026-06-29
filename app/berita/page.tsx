@@ -1,8 +1,8 @@
-import { Navbar } from "@/components/sections/navbar";
-import { Footer } from "@/components/sections/footer";
+import { Navbar } from "@/components/sections/Navbar";
+import { Footer } from "@/components/sections/Footer";
 import { Calendar, ArrowRight, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/Badge";
 import { newsItems } from "@/lib/site";
 
 export default function AllNewsPage() {
