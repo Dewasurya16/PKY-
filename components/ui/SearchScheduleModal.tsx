@@ -4,8 +4,8 @@ import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, MapPin, Calendar, Clock, Stethoscope } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { Button } from "./button";
-import { facilitiesData } from "@/lib/site";
+import { Button } from "./Button";
+import type { Facility } from "@/lib/types/database";
 
 interface SearchScheduleModalProps {
   isOpen: boolean;
@@ -15,11 +15,10 @@ interface SearchScheduleModalProps {
     city: string;
     type: string;
   };
+  facilities?: Facility[];
 }
 
-// Removed local dummyData
-
-export function SearchScheduleModal({ isOpen, onClose, filters }: SearchScheduleModalProps) {
+export function SearchScheduleModal({ isOpen, onClose, filters, facilities = [] }: SearchScheduleModalProps) {
   const router = useRouter();
   React.useEffect(() => {
     if (isOpen) {
@@ -84,12 +83,12 @@ export function SearchScheduleModal({ isOpen, onClose, filters }: SearchSchedule
               {/* Content */}
               <div className="p-6 max-h-[60vh] overflow-y-auto">
                 <div className="space-y-4">
-                  {facilitiesData
+                  {facilities
                     .filter((item) => {
                       if (!filters) return true;
                       let match = true;
-                      if (filters.province && !item.address.includes(filters.province) && !item.address.includes("Jakarta")) match = false; // Note: "DKI Jakarta" is handled differently in dummy data
-                      if (filters.city && !item.address.includes(filters.city)) match = false;
+                      if (filters.province && !item.address.toLowerCase().includes(filters.province.toLowerCase())) match = false;
+                      if (filters.city && !item.address.toLowerCase().includes(filters.city.toLowerCase())) match = false;
                       if (filters.type && item.type !== filters.type) match = false;
                       return match;
                     })
@@ -103,7 +102,7 @@ export function SearchScheduleModal({ isOpen, onClose, filters }: SearchSchedule
                           <span className="rounded-full bg-blue-50 px-2.5 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
                             {item.type}
                           </span>
-                          <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${item.available ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300' : 'bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300'}`}>
+                          <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${item.is_available ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300' : 'bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300'}`}>
                             {item.status}
                           </span>
                         </div>
@@ -128,18 +127,18 @@ export function SearchScheduleModal({ isOpen, onClose, filters }: SearchSchedule
 
                       <div className="mt-2 sm:mt-0">
                         <Button 
-                          variant={item.available ? "primary" : "outline"} 
+                          variant={item.is_available ? "primary" : "outline"} 
                           size="md" 
                           className="w-full sm:w-auto"
-                          disabled={!item.available}
+                          disabled={!item.is_available}
                           onClick={() => {
-                            if (item.available) {
+                            if (item.is_available) {
                               onClose();
                               router.push(`/fasilitas/${item.slug}`);
                             }
                           }}
                         >
-                          {item.available ? "Lihat Detail" : "Info Lanjut"}
+                          {item.is_available ? "Lihat Detail" : "Info Lanjut"}
                         </Button>
                       </div>
                     </div>

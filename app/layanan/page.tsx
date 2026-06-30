@@ -2,7 +2,7 @@ import { Navbar } from "@/components/sections/navbar";
 import { Footer } from "@/components/sections/footer";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { services } from "@/lib/site";
+import { getAvailableFacilities } from "@/lib/queries/facility.queries";
 import { Stethoscope, HeartPulse, Pill, Activity, ClipboardCheck, Ambulance } from "lucide-react";
 
 const iconMap: Record<string, React.ElementType> = {
@@ -14,7 +14,11 @@ const iconMap: Record<string, React.ElementType> = {
   Ambulance,
 };
 
-export default function ServicesPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ServicesPage() {
+  const facilities = await getAvailableFacilities();
+
   return (
     <main className="flex min-h-screen flex-col bg-surface-soft dark:bg-navy-dark">
       <Navbar />
@@ -36,24 +40,36 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => {
-              const Icon = iconMap[service.icon] || Stethoscope;
-              return (
-                <div key={service.title} className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white p-8 shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 dark:bg-navy dark:border-white/10 border border-transparent">
-                  <div className={`mb-6 flex h-16 w-16 items-center justify-center rounded-2xl icon-container ${service.color} bg-primary/10 text-primary dark:bg-primary/20`}>
-                    <Icon size={28} />
+          {(!facilities || facilities.length === 0) ? (
+            <div className="flex min-h-[40vh] flex-col items-center justify-center rounded-3xl border border-dashed border-gray-200 bg-white/50 text-center dark:border-white/10 dark:bg-navy/30">
+              <Stethoscope size={48} className="mb-4 text-text-muted dark:text-white/20" />
+              <h3 className="mb-2 text-xl font-bold text-navy dark:text-white">Data belum tersedia</h3>
+              <p className="text-sm text-text-secondary dark:text-white/60">
+                Belum ada data fasilitas/layanan yang dipublikasikan saat ini.
+              </p>
+            </div>
+          ) : (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {facilities.map((service) => {
+                // Try to infer an icon from the facility type or services, fallback to Stethoscope
+                const iconName = service.type === "Klinik Utama" ? "HeartPulse" : (service.type === "Apotek" ? "Pill" : "Stethoscope");
+                const Icon = iconMap[iconName] || Stethoscope;
+                return (
+                  <div key={service.id} className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white p-8 shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 dark:bg-navy dark:border-white/10 border border-transparent">
+                    <div className={`mb-6 flex h-16 w-16 items-center justify-center rounded-2xl icon-container bg-primary/10 text-primary dark:bg-primary/20`}>
+                      <Icon size={28} />
+                    </div>
+                    <h3 className="font-display text-2xl font-bold text-navy dark:text-white mb-4">
+                      {service.name}
+                    </h3>
+                    <p className="flex-1 text-base leading-relaxed text-text-secondary dark:text-white/70">
+                      {service.description}
+                    </p>
                   </div>
-                  <h3 className="font-display text-2xl font-bold text-navy dark:text-white mb-4">
-                    {service.title}
-                  </h3>
-                  <p className="flex-1 text-base leading-relaxed text-text-secondary dark:text-white/70">
-                    {service.description}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
 

@@ -15,8 +15,8 @@ import {
   CheckCircle2,
   Star,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
 import { JusticeHeartbeatMark } from "@/components/ui/JusticeMark";
 import { CountUp } from "@/components/ui/CountUp";
 import { FloatingParticles } from "@/components/ui/ParticlesBg";
@@ -24,8 +24,9 @@ import { FloatingParticles } from "@/components/ui/ParticlesBg";
 const BookingModal = dynamic(() => import("@/components/ui/BookingModal").then(mod => mod.BookingModal), { ssr: false });
 const SearchScheduleModal = dynamic(() => import("@/components/ui/SearchScheduleModal").then(mod => mod.SearchScheduleModal), { ssr: false });
 import { site } from "@/lib/site";
+import type { Facility } from "@/lib/types/database";
 
-export function Hero() {
+export function Hero({ facilities = [] }: { facilities?: Facility[] }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
@@ -331,9 +332,10 @@ export function Hero() {
 
       <BookingModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <SearchScheduleModal 
-        isOpen={isSearchModalOpen} 
-        onClose={() => setIsSearchModalOpen(false)} 
+        isOpen={isSearchModalOpen}
+        onClose={() => setIsSearchModalOpen(false)}
         filters={{ province, city, type: facilityType }}
+        facilities={facilities}
       />
 
       {/* Bottom wave */}

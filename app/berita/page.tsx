@@ -2,10 +2,14 @@ import { Navbar } from "@/components/sections/navbar";
 import { Footer } from "@/components/sections/footer";
 import { Calendar, ArrowRight, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { newsItems } from "@/lib/site";
+import Image from "next/image";
+import { Badge } from "@/components/ui/Badge";
+import { getAllNews } from "@/lib/queries/news.queries";
 
-export default function AllNewsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function AllNewsPage() {
+  const newsItems = await getAllNews();
   return (
     <main className="flex min-h-screen flex-col bg-surface-soft dark:bg-navy-dark">
       <Navbar />
@@ -27,44 +31,54 @@ export default function AllNewsPage() {
             </p>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {newsItems.map((item) => (
-              <div key={item.slug} className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 dark:bg-navy dark:border-white/10 border border-transparent">
-                <div className="relative aspect-[16/9] w-full overflow-hidden bg-primary-50">
-                  {item.image ? (
-                    <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-tr from-primary-100 to-accent-soft/50">
-                      <Calendar size={48} className="text-primary-200 opacity-50" />
+          {(!newsItems || newsItems.length === 0) ? (
+            <div className="flex min-h-[40vh] flex-col items-center justify-center rounded-3xl border border-dashed border-gray-200 bg-white/50 text-center dark:border-white/10 dark:bg-navy/30">
+              <Calendar size={48} className="mb-4 text-text-muted dark:text-white/20" />
+              <h3 className="mb-2 text-xl font-bold text-navy dark:text-white">Data belum tersedia</h3>
+              <p className="text-sm text-text-secondary dark:text-white/60">
+                Belum ada berita yang dipublikasikan saat ini.
+              </p>
+            </div>
+          ) : (
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {newsItems.map((item) => (
+                <div key={item.slug} className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 dark:bg-navy dark:border-white/10 border border-transparent">
+                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-primary-50">
+                    {item.image_url ? (
+                      <Image fill src={item.image_url} alt={item.title} className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-tr from-primary-100 to-accent-soft/50">
+                        <Calendar size={48} className="text-primary-200 opacity-50" />
+                      </div>
+                    )}
+                    <div className="absolute left-4 top-4">
+                      <Badge tone="teal" className="bg-white/90 backdrop-blur-sm shadow-sm">
+                        {item.category}
+                      </Badge>
                     </div>
-                  )}
-                  <div className="absolute left-4 top-4">
-                    <Badge tone="teal" className="bg-white/90 backdrop-blur-sm shadow-sm">
-                      {item.category}
-                    </Badge>
+                  </div>
+                  <div className="flex flex-1 flex-col p-6 lg:p-8">
+                    <div className="mb-4 flex items-center gap-2 text-xs font-medium text-text-muted dark:text-white/50">
+                      <Calendar size={14} />
+                      <span>{new Date(item.published_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                    </div>
+                    <h3 className="font-display text-xl font-bold leading-snug text-navy transition-colors group-hover:text-primary dark:text-white">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-text-secondary line-clamp-3 dark:text-white/70 text-justify">
+                      {item.excerpt}
+                    </p>
+                    <Link
+                      href={`/berita/${item.slug}`}
+                      className="mt-6 flex w-fit items-center gap-2 text-sm font-bold text-primary transition-colors hover:text-primary-dark dark:text-primary-light"
+                    >
+                      Baca Selengkapnya <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                    </Link>
                   </div>
                 </div>
-                <div className="flex flex-1 flex-col p-6 lg:p-8">
-                  <div className="mb-4 flex items-center gap-2 text-xs font-medium text-text-muted dark:text-white/50">
-                    <Calendar size={14} />
-                    <span>{item.date}</span>
-                  </div>
-                  <h3 className="font-display text-xl font-bold leading-snug text-navy transition-colors group-hover:text-primary dark:text-white">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-text-secondary line-clamp-3 dark:text-white/70">
-                    {item.excerpt}
-                  </p>
-                  <Link
-                    href={`/berita/${item.slug}`}
-                    className="mt-6 flex w-fit items-center gap-2 text-sm font-bold text-primary transition-colors hover:text-primary-dark dark:text-primary-light"
-                  >
-                    Baca Selengkapnya <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

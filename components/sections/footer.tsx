@@ -1,6 +1,6 @@
 import { Heart, MapPin, Mail, Phone, ArrowRight } from "lucide-react";
 import { site, navLinks } from "@/lib/site";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import NewsletterForm from "@/components/ui/NewsletterForm";
 
 export function Footer() {

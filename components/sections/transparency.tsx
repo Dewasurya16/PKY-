@@ -1,44 +1,19 @@
-"use client";
-
-import { SectionTag } from "@/components/ui/badge";
-import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
-import { Button } from "@/components/ui/button";
+import { getPublishedDownloads } from "@/lib/queries/download.queries";import { SectionTag } from "@/components/ui/Badge";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
+import { Button } from "@/components/ui/Button";
 import { FileText, Download, ShieldAlert, MessageSquare, ExternalLink, FileDown } from "lucide-react";
 import Link from "next/link";
 
-type DownloadItem = {
-  title: string;
-  desc: string;
-  size: string;
-  type: string;
-};
+import type { Download as DownloadType } from "@/lib/types/database";
 
-const downloads: DownloadItem[] = [
-  {
-    title: "Perja No. 12 Tahun 2023",
-    desc: "Tentang Pedoman Pelayanan Kesehatan di Lingkungan Kejaksaan",
-    size: "2.4 MB",
-    type: "PDF",
-  },
-  {
-    title: "Standar Operasional Prosedur (SOP)",
-    desc: "SOP Pelayanan Medis Klinik Pratama Adhyaksa",
-    size: "1.8 MB",
-    type: "PDF",
-  },
-  {
-    title: "Buku Saku MCU 2026",
-    desc: "Panduan lengkap Medical Check-Up bagi Aparatur",
-    size: "5.1 MB",
-    type: "PDF",
-  },
-  {
-    title: "Formulir Rujukan Pasien",
-    desc: "Form standar rujukan ke Rumah Sakit Adhyaksa",
-    size: "800 KB",
-    type: "PDF",
-  },
-];
+function formatBytes(bytes: number, decimals = 2) {
+  if (!+bytes) return '0 Bytes'
+  const k = 1024
+  const dm = decimals < 0 ? 0 : decimals
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
+}
 
 function TransparencyServiceCard({
   icon: Icon,
@@ -86,7 +61,7 @@ function TransparencyServiceCard({
   );
 }
 
-function DownloadListItem({ item }: { item: DownloadItem }) {
+function DownloadListItem({ item }: { item: DownloadType }) {
   return (
     <StaggerItem>
       <div className="group flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-gray-100 p-4 transition-all hover:border-primary/30 hover:bg-primary-50/50 hover:shadow-sm dark:border-white/10 dark:bg-navy/30 dark:hover:bg-navy/50 dark:hover:border-primary/50">
@@ -99,18 +74,19 @@ function DownloadListItem({ item }: { item: DownloadItem }) {
               {item.title}
             </h4>
             <p className="text-xs sm:text-sm text-text-secondary mt-1 dark:text-white/70">
-              {item.desc}
+              {item.description}
             </p>
             <div className="mt-2 flex items-center gap-2 text-[11px] font-medium text-gray-400 dark:text-white/40">
-              <span className="rounded bg-gray-100 px-2 py-0.5 dark:bg-white/10">{item.type}</span>
+              <span className="rounded bg-gray-100 px-2 py-0.5 dark:bg-white/10">PDF</span>
               <span>•</span>
-              <span>{item.size}</span>
+              <span>{formatBytes(Number(item.file_size))}</span>
             </div>
           </div>
         </div>
         <a 
-          href={`/document/${item.title.replace(/\s+/g, '-').toLowerCase()}.pdf`}
-          download={`${item.title}.pdf`}
+          href={item.file_url}
+          target="_blank"
+          rel="noopener noreferrer"
           aria-label={`Unduh ${item.title}`}
           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-gray-400 hover:text-primary hover:bg-primary/10 transition-colors dark:text-white/40 dark:hover:text-primary-light dark:hover:bg-primary/20"
         >
@@ -121,7 +97,8 @@ function DownloadListItem({ item }: { item: DownloadItem }) {
   );
 }
 
-export function Transparency() {
+export async function Transparency() {
+  const downloads = await getPublishedDownloads();
   return (
     <section 
       id="transparansi" 
@@ -182,18 +159,30 @@ export function Transparency() {
               </div>
 
               <Stagger className="space-y-4">
-                {downloads.map((item, i) => (
-                  <DownloadListItem key={i} item={item} />
-                ))}
+                {(!downloads || downloads.length === 0) ? (
+                  <div className="flex flex-col items-center justify-center py-8 text-center border border-dashed border-gray-200 rounded-2xl bg-white/50 dark:border-white/10 dark:bg-navy/30">
+                    <FileDown size={32} className="mb-3 text-text-muted dark:text-white/20" />
+                    <h4 className="text-base font-bold text-navy dark:text-white">Data belum tersedia</h4>
+                    <p className="text-sm text-text-secondary dark:text-white/60">
+                      Belum ada dokumen yang dipublikasikan.
+                    </p>
+                  </div>
+                ) : (
+                  downloads.map((item) => (
+                    <DownloadListItem key={item.id} item={item} />
+                  ))
+                )}
               </Stagger>
               
-              <div className="mt-8 text-center">
-                <Link href="/dokumen" className="inline-block w-full sm:w-auto">
-                  <Button variant="outline" className="w-full sm:w-auto dark:border-white/20 dark:text-white dark:hover:bg-white/10">
-                    Lihat Semua Dokumen
-                  </Button>
-                </Link>
-              </div>
+              {downloads && downloads.length > 0 && (
+                <div className="mt-8 text-center">
+                  <Link href="/dokumen" className="inline-block w-full sm:w-auto">
+                    <Button variant="outline" className="w-full sm:w-auto dark:border-white/20 dark:text-white dark:hover:bg-white/10">
+                      Lihat Semua Dokumen
+                    </Button>
+                  </Link>
+                </div>
+              )}
             </Reveal>
           </div>
         </div>

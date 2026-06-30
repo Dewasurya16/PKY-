@@ -4,6 +4,7 @@ const config: Config = {
   darkMode: "class",
   content: [
     "./app/**/*.{ts,tsx}",
+    "./app/\\(auth\\)/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
   ],
   theme: {

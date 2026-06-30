@@ -1,11 +1,11 @@
 "use client";
 
-import { SectionTag } from "@/components/ui/badge";
-import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
-import { ServiceCard } from "@/components/ui/cards";
+import { SectionTag } from "@/components/ui/Badge";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
+import { ServiceCard } from "@/components/ui/Cards";
 import { services } from "@/lib/site";
 import { Building2, Hospital, ShieldCheck, Users, FileCheck, Box, Stethoscope } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 
 const iconMap: Record<string, React.ElementType> = {

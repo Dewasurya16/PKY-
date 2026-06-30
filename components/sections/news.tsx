@@ -1,31 +1,22 @@
 "use client";
 
 import { ArrowRight, Calendar } from "lucide-react";
-import { SectionTag, Badge } from "@/components/ui/badge";
-import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
-import { newsItems } from "@/lib/site";
-import { Button } from "@/components/ui/button";
+import { SectionTag, Badge } from "@/components/ui/Badge";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
+import type { News as NewsType } from "@/lib/types/database";
+
+import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import Image from "next/image";
 
-// Tipe spesifik untuk props, memastikan type-safety
-type NewsItem = {
-  title: string;
-  excerpt: string;
-  category: string;
-  date: string;
-  image?: string;
-  slug: string;
-};
-
-function FeaturedNewsCard({ item }: { item: NewsItem }) {
+function FeaturedNewsCard({ item }: { item: NewsType }) {
   return (
     <Reveal className="h-full">
       <div className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 dark:bg-navy dark:shadow-none dark:border dark:border-white/10 dark:hover:border-primary/50">
         <div className="relative aspect-[16/9] w-full overflow-hidden bg-primary-50 dark:bg-white/5">
-          {item.image ? (
+          {item.image_url ? (
             <Image 
-              src={item.image} 
+              src={item.image_url} 
               alt={item.title} 
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105" 
@@ -44,7 +35,7 @@ function FeaturedNewsCard({ item }: { item: NewsItem }) {
         <div className="flex flex-1 flex-col p-6">
           <div className="mb-3 flex items-center gap-2 text-sm font-medium text-text-muted dark:text-white/50">
             <Calendar size={16} aria-hidden="true" />
-            <span>{item.date}</span>
+            <span>{new Date(item.published_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
           </div>
           <h3 className="font-display text-xl sm:text-2xl font-bold leading-snug text-navy transition-colors group-hover:text-primary dark:text-white dark:group-hover:text-primary-light">
             {item.title}
@@ -65,14 +56,14 @@ function FeaturedNewsCard({ item }: { item: NewsItem }) {
   );
 }
 
-function CompactNewsCard({ item }: { item: NewsItem }) {
+function CompactNewsCard({ item }: { item: NewsType }) {
   return (
-    <StaggerItem className="flex-1">
-      <div className="group flex h-full flex-col sm:flex-row overflow-hidden rounded-3xl bg-white shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 dark:bg-navy dark:shadow-none dark:border dark:border-white/10 dark:hover:border-primary/50">
-        <div className="relative aspect-[16/9] sm:aspect-[4/3] sm:w-40 shrink-0 overflow-hidden bg-primary-50 dark:bg-white/5">
-          {item.image ? (
+    <StaggerItem>
+      <div className="group flex flex-col sm:flex-row overflow-hidden rounded-3xl bg-white shadow-card transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 dark:bg-navy dark:shadow-none dark:border dark:border-white/10 dark:hover:border-primary/50">
+        <div className="relative h-48 sm:h-auto sm:w-48 shrink-0 overflow-hidden bg-primary-50 dark:bg-white/5">
+          {item.image_url ? (
             <Image 
-              src={item.image} 
+              src={item.image_url} 
               alt={item.title} 
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105" 
@@ -84,24 +75,27 @@ function CompactNewsCard({ item }: { item: NewsItem }) {
           )}
         </div>
         <div className="flex flex-1 flex-col justify-center p-5 sm:p-6">
-          <div className="mb-2 flex items-center justify-between">
+          <div className="mb-3 flex flex-wrap items-center gap-3">
             <Badge tone="teal" className="bg-primary-50 dark:bg-primary/20 dark:text-primary-light">
               {item.category}
             </Badge>
             <div className="flex items-center gap-1.5 text-xs font-medium text-text-muted dark:text-white/50">
               <Calendar size={12} aria-hidden="true" />
-              <span>{item.date}</span>
+              <span>{new Date(item.published_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
             </div>
           </div>
-          <h3 className="font-display text-base font-bold leading-tight text-navy transition-colors group-hover:text-primary line-clamp-2 dark:text-white dark:group-hover:text-primary-light">
+          <h3 className="font-display text-xl font-bold leading-snug text-navy transition-colors group-hover:text-primary line-clamp-2 dark:text-white dark:group-hover:text-primary-light">
             {item.title}
           </h3>
+          <p className="mt-2 text-sm text-text-secondary line-clamp-2 dark:text-white/70 text-justify">
+            {item.excerpt}
+          </p>
           <Link
             href={`/berita/${item.slug}`}
             aria-label={`Baca lebih lanjut tentang ${item.title}`}
-            className="mt-3 flex w-fit items-center gap-1.5 text-xs font-bold text-primary transition-colors hover:text-primary-dark dark:text-primary-light dark:hover:text-white"
+            className="mt-4 flex w-fit items-center gap-1.5 text-sm font-bold text-primary transition-colors hover:text-primary-dark dark:text-primary-light dark:hover:text-white"
           >
-            Baca <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
+            Baca Selengkapnya <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" aria-hidden="true" />
           </Link>
         </div>
       </div>
@@ -109,7 +103,7 @@ function CompactNewsCard({ item }: { item: NewsItem }) {
   );
 }
 
-export function News() {
+export function News({ newsItems = [] }: { newsItems?: NewsType[] }) {
   return (
     <section 
       id="berita" 
@@ -136,17 +130,21 @@ export function News() {
 
         <div className="mt-10 grid gap-8 lg:grid-cols-2">
           {/* Featured News (Left) */}
-          {newsItems.length > 0 && (
+          {newsItems.length > 0 ? (
             <div className="flex flex-col">
-              <FeaturedNewsCard item={newsItems[0] as NewsItem} />
+              <FeaturedNewsCard item={newsItems[0]} />
+            </div>
+          ) : (
+            <div className="py-10 text-center text-text-muted">
+              Belum ada berita yang diterbitkan.
             </div>
           )}
 
           {/* Other News List (Right) */}
-          <div className="flex flex-col gap-5">
-            <Stagger className="flex h-full flex-col gap-6">
+          <div className="flex flex-col justify-start gap-5">
+            <Stagger className="flex flex-col gap-6">
               {newsItems.slice(1, 3).map((item) => (
-                <CompactNewsCard key={item.slug} item={item as NewsItem} />
+                <CompactNewsCard key={item.slug} item={item} />
               ))}
             </Stagger>
           </div>

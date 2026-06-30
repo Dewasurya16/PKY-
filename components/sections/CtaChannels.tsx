@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { CheckCircle2 } from "lucide-react";
-import { Reveal } from "@/components/ui/motion";
-import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/Motion";
+import { Button } from "@/components/ui/Button";
 import { BookingModal } from "@/components/ui/BookingModal";
 
 export function CtaChannels() {

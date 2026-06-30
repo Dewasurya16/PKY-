@@ -1,6 +1,6 @@
 "use client";
 
-import { Stagger, StaggerItem } from "@/components/ui/motion";
+import { Stagger, StaggerItem } from "@/components/ui/Motion";
 import { CountUp } from "@/components/ui/CountUp";
 import { stats } from "@/lib/site";
 import { Users, ThumbsUp, Globe, UserCheck } from "lucide-react";

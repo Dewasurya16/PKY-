@@ -4,8 +4,8 @@ import * as React from "react"
 import useEmblaCarousel from "embla-carousel-react"
 import { motion } from "framer-motion"
 import { ChevronLeft, ChevronRight, Maximize2 } from "lucide-react"
-import { SectionTag } from "@/components/ui/badge"
-import { Reveal } from "@/components/ui/motion"
+import { SectionTag } from "@/components/ui/Badge"
+import { Reveal } from "@/components/ui/Motion"
 
 const photos = [
   {

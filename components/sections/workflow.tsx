@@ -1,7 +1,7 @@
 "use client";
 
-import { SectionTag } from "@/components/ui/badge";
-import { Reveal, Stagger, StaggerItem } from "@/components/ui/motion";
+import { SectionTag } from "@/components/ui/Badge";
+import { Reveal, Stagger, StaggerItem } from "@/components/ui/Motion";
 import { UserCheck, CalendarDays, Stethoscope, FileCheck2 } from "lucide-react";
 
 type WorkflowStepProps = {

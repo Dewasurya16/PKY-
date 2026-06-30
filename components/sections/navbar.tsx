@@ -3,7 +3,7 @@
 import * as React from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { Menu, X, Heart, Phone, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { navLinks, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import Link from "next/link";

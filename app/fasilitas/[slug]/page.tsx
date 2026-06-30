@@ -1,14 +1,17 @@
 import { notFound } from "next/navigation";
-import { facilitiesData } from "@/lib/site";
+import { getFacilityBySlug } from "@/lib/queries/facility.queries";
 import { Navbar } from "@/components/sections/navbar";
 import { Footer } from "@/components/sections/footer";
 import { MapPin, Phone, ArrowLeft, Stethoscope } from "lucide-react";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
+import { Badge } from "@/components/ui/Badge";
+
+export const dynamic = "force-dynamic";
 
 export default async function FacilityDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
-  const facility = facilitiesData.find((f) => f.slug === resolvedParams.slug);
+  const facility = await getFacilityBySlug(resolvedParams.slug);
 
   if (!facility) {
     notFound();
@@ -30,12 +33,23 @@ export default async function FacilityDetailPage({ params }: { params: Promise<{
           <div className="bg-white rounded-3xl p-8 lg:p-12 shadow-sm border border-gray-100 dark:bg-navy dark:border-white/10">
             <div className="flex flex-wrap items-center gap-3 mb-6">
               <Badge tone="blue">{facility.type}</Badge>
-              <Badge tone={facility.available ? "emerald" : "amber"}>{facility.status}</Badge>
+              <Badge tone={facility.is_available ? "emerald" : "amber"}>{facility.status}</Badge>
             </div>
 
             <h1 className="font-display text-3xl font-bold text-navy sm:text-4xl lg:text-5xl dark:text-white mb-6">
               {facility.name}
             </h1>
+
+            {facility.image_url && (
+              <div className="mb-10 relative w-full overflow-hidden rounded-2xl bg-surface-soft aspect-[16/9]">
+                <Image 
+                  fill
+                  src={facility.image_url} 
+                  alt={facility.name} 
+                  className="object-cover"
+                />
+              </div>
+            )}
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-6 text-text-secondary dark:text-white/70 mb-10 border-b border-gray-100 pb-10 dark:border-white/10">
               <div className="flex items-center gap-3">
