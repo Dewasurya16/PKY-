@@ -17,6 +17,7 @@ export const navLinks = [
   { href: "/#tim", label: "Struktural" },
   { href: "/#transparansi", label: "Informasi Publik" },
   { href: "/#berita", label: "Berita" },
+  { href: "/mcu", label: "Jadwal MCU" },
   { href: "/#faq", label: "FAQ" },
 ];
 

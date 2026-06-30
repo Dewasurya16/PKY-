@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { newsInsertSchema, newsUpdateSchema } from "@/lib/validations/news.schema";
 import { slugify } from "@/lib/utils/slugify";
+import { logError } from "@/lib/utils/logger";
 import type { ActionState } from "@/lib/types/database";
 import { STORAGE_BUCKETS, MAX_FILE_SIZES, ACCEPTED_IMAGE_TYPES } from "@/lib/types/database";
 
@@ -16,7 +17,6 @@ export async function createNews(
   formData: FormData,
 ): Promise<ActionState> {
   const supabase = createAdminClient();
-  console.log("[createNews] Supabase Admin Client initialized:", !!supabase);
 
   // 1. Parse field dari FormData
   const rawInput = {
@@ -37,7 +37,7 @@ export async function createNews(
       if (!fieldErrors[field]) fieldErrors[field] = [];
       fieldErrors[field].push(issue.message);
     }
-    console.error("[createNews] Validation Failed:", parsed.error.flatten());
+    await logError("createNews - Validation Failed", parsed.error.flatten());
     return { success: false, error: "Validasi gagal", fieldErrors };
   }
 
@@ -85,7 +85,6 @@ export async function createNews(
     image_url: imageUrl,
     published_at: parsed.data.published_at ?? new Date().toISOString(),
   };
-  console.log("[createNews] Inserting payload into Supabase:", insertPayload);
 
   const { data, error } = await supabase
     .from("news")
@@ -94,11 +93,9 @@ export async function createNews(
     .single();
 
   if (error) {
-    console.error("[createNews] Supabase Insert Error:", error);
+    await logError("createNews - Supabase Insert Error", error);
     return { success: false, error: `Gagal menyimpan berita: ${error.message}` };
   }
-  
-  console.log("[createNews] Success inserted data:", data);
 
   revalidatePath("/admin/berita");
   revalidatePath("/berita");
@@ -137,8 +134,6 @@ export async function updateNews(
   const cleanedInput = Object.fromEntries(
     Object.entries(rawInput).filter(([, v]) => v !== undefined),
   );
-  console.log("[updateNews] rawInput:", rawInput);
-  console.log("[updateNews] cleanedInput:", cleanedInput);
 
   // 2. Validasi
   const parsed = newsUpdateSchema.safeParse(cleanedInput);
@@ -196,7 +191,6 @@ export async function updateNews(
   }
 
   updatePayload.updated_at = new Date().toISOString();
-  console.log("[updateNews] Final updatePayload:", updatePayload);
 
   // 5. Update database
   const { error, data } = await supabase
@@ -204,10 +198,9 @@ export async function updateNews(
     .update(updatePayload)
     .eq("id", id)
     .select();
-    
-  console.log("[updateNews] Supabase Update Result:", data, error);
 
   if (error) {
+    await logError("updateNews - Supabase Update Error", error);
     return { success: false, error: `Gagal update berita: ${error.message}` };
   }
 

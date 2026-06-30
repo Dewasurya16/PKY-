@@ -68,6 +68,7 @@ export type ActionState = {
   data?: Record<string, unknown>;
   error?: string;
   fieldErrors?: Record<string, string[]>;
+  warning?: string;
 };
 
 // ──────────────────────────── Constants ────────────────────────────
@@ -132,3 +133,35 @@ export const ACCEPTED_DOCUMENT_TYPES = [
   "application/msword",
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 ] as const;
+
+// ──────────────────────────── MCU Schedules ────────────────────────────
+
+/**
+ * Representasi satu baris dari tabel `mcu_schedules`.
+ * Digunakan untuk menyuplai konteks jadwal MCU ke chatbot AI.
+ */
+export type McuSchedule = {
+  id: string;
+  facility_id: string;
+  facility_name?: string;
+  schedule_date: string;
+  time_start: string;
+  time_end: string;
+  description: string | null;
+  quota: number;
+  registered: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+// ──────────────────────────── Chat ────────────────────────────
+
+/**
+ * Format pesan chat untuk komunikasi client ↔ API route chatbot.
+ */
+export type ChatMessage = {
+  role: "user" | "assistant" | "system";
+  content: string;
+};
+

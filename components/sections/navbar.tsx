@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { navLinks, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
@@ -62,8 +63,8 @@ export function Navbar() {
             {/* Logo */}
             <Link href="/#beranda" className="flex items-center gap-3 group">
               <div className="flex items-center gap-2">
-                <img src="/image/logo.png" alt="Logo PKY" className="h-10 w-auto object-contain drop-shadow-sm" />
-                <img src="/image/logo-klinik.png" alt="Logo Klinik Adhyaksa" className="h-10 w-auto object-contain drop-shadow-sm" />
+                <Image src="/image/logo.png" alt="Logo PKY" width={40} height={40} priority className="h-10 w-auto object-contain drop-shadow-sm" />
+                <Image src="/image/logo-klinik.png" alt="Logo Klinik Adhyaksa" width={40} height={40} priority className="h-10 w-auto object-contain drop-shadow-sm" />
               </div>
               <span className="hidden sm:flex flex-col pl-3 gap-[2px] border-l-2 border-primary/40 dark:border-primary/60">
                 <span className="font-display text-[15px] font-extrabold leading-none tracking-tight text-primary dark:text-white">

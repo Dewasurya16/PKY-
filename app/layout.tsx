@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 // Lazy load widgets
 const FloatingChat = dynamic(() => import("@/components/ui/FloatingChat").then(mod => mod.FloatingChat));
 const ScrollToTop = dynamic(() => import("@/components/ui/ScrollToTop").then(mod => mod.ScrollToTop));
+import { Toaster } from "sonner";
 
 const jakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -57,6 +58,7 @@ export default function RootLayout({
           {children}
           <FloatingChat />
           <ScrollToTop />
+          <Toaster richColors position="top-right" />
         </ThemeProvider>
       </body>
     </html>

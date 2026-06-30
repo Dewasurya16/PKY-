@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { downloadInsertSchema, downloadUpdateSchema } from "@/lib/validations/download.schema";
+import { logError } from "@/lib/utils/logger";
 import type { ActionState } from "@/lib/types/database";
 import { STORAGE_BUCKETS, MAX_FILE_SIZES, ACCEPTED_DOCUMENT_TYPES } from "@/lib/types/database";
 
@@ -59,6 +60,7 @@ export async function createDownload(
       if (!fieldErrors[field]) fieldErrors[field] = [];
       fieldErrors[field].push(issue.message);
     }
+    await logError("createDownload - Validation Failed", parsed.error.flatten());
     return { success: false, error: "Validasi gagal", fieldErrors };
   }
 
@@ -91,10 +93,12 @@ export async function createDownload(
     .single();
 
   if (error) {
+    await logError("createDownload - Supabase Insert Error", error);
     return { success: false, error: `Gagal menyimpan dokumen: ${error.message}` };
   }
 
   revalidatePath("/admin/unduhan");
+  revalidatePath("/layanan");
   revalidatePath("/");
 
   return { success: true, data: { id: data.id } };
@@ -139,6 +143,7 @@ export async function updateDownload(
       if (!fieldErrors[field]) fieldErrors[field] = [];
       fieldErrors[field].push(issue.message);
     }
+    await logError("updateDownload - Validation Failed", parsed.error.flatten());
     return { success: false, error: "Validasi gagal", fieldErrors };
   }
 
@@ -188,10 +193,12 @@ export async function updateDownload(
     .eq("id", id);
 
   if (error) {
+    await logError("updateDownload - Supabase Update Error", error);
     return { success: false, error: `Gagal update dokumen: ${error.message}` };
   }
 
   revalidatePath("/admin/unduhan");
+  revalidatePath("/layanan");
   revalidatePath("/");
 
   return { success: true, data: { id } };
@@ -225,10 +232,12 @@ export async function deleteDownload(
     .eq("id", id);
 
   if (error) {
+    await logError("deleteDownload - Supabase Delete Error", error);
     return { success: false, error: `Gagal menghapus dokumen: ${error.message}` };
   }
 
   revalidatePath("/admin/unduhan");
+  revalidatePath("/layanan");
   revalidatePath("/");
 
   return { success: true, data: { id } };

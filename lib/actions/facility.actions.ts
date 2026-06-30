@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { facilityInsertSchema, facilityUpdateSchema } from "@/lib/validations/facility.schema";
 import { slugify } from "@/lib/utils/slugify";
+import { logError } from "@/lib/utils/logger";
 import type { ActionState } from "@/lib/types/database";
 import { STORAGE_BUCKETS, MAX_FILE_SIZES, ACCEPTED_IMAGE_TYPES } from "@/lib/types/database";
 
@@ -55,6 +56,7 @@ export async function createFacility(
       if (!fieldErrors[field]) fieldErrors[field] = [];
       fieldErrors[field].push(issue.message);
     }
+    await logError("createFacility - Validation Failed", parsed.error.flatten());
     return { success: false, error: "Validasi gagal", fieldErrors };
   }
 
@@ -103,6 +105,7 @@ export async function createFacility(
     .single();
 
   if (error) {
+    await logError("createFacility - Supabase Insert Error", error);
     return { success: false, error: `Gagal menyimpan fasilitas: ${error.message}` };
   }
 
@@ -162,6 +165,7 @@ export async function updateFacility(
       if (!fieldErrors[field]) fieldErrors[field] = [];
       fieldErrors[field].push(issue.message);
     }
+    await logError("updateFacility - Validation Failed", parsed.error.flatten());
     return { success: false, error: "Validasi gagal", fieldErrors };
   }
 
@@ -214,9 +218,11 @@ export async function updateFacility(
   const { error } = await supabase
     .from("facilities")
     .update(updatePayload)
-    .eq("id", id);
+    .eq("id", id)
+    .select();
 
   if (error) {
+    await logError("updateFacility - Supabase Update Error", error);
     return { success: false, error: `Gagal update fasilitas: ${error.message}` };
   }
 
@@ -254,6 +260,7 @@ export async function deleteFacility(
     .eq("id", id);
 
   if (error) {
+    await logError("deleteFacility - Supabase Delete Error", error);
     return { success: false, error: `Gagal menghapus fasilitas: ${error.message}` };
   }
 

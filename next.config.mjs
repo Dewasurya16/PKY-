@@ -5,7 +5,9 @@ const nextConfig = {
     serverActions: {
       bodySizeLimit: '30mb',
     },
+    optimizePackageImports: ['framer-motion', 'lucide-react'],
   },
+  serverExternalPackages: ['pdfkit'],
   images: {
     remotePatterns: [
       {
@@ -13,6 +15,28 @@ const nextConfig = {
         hostname: "okdixuuvwzcfyomzksss.supabase.co",
       },
     ],
+  },
+  async headers() {
+    return [
+      {
+        source: '/image/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/fonts/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
   },
 };
 

@@ -1,56 +1,72 @@
-# Pusat Kesehatan Yustisial (PKY) — Kejaksaan RI
+# Portal Mahkamah Kesehatan (Pusat Kesehatan Yustisial / PKY)
 
-Portal resmi Pusat Kesehatan Yustisial (PKY) Kejaksaan Republik Indonesia. Membina dan mengelola layanan kesehatan aparatur kejaksaan secara profesional, modern, dan terpercaya.
+Selamat datang di repositori modernisasi **Portal Pusat Kesehatan Yustisial (PKY)** Kejaksaan Republik Indonesia. Proyek ini dibangun untuk mendigitalisasi layanan kesehatan dan transparansi publik secara terintegrasi, aman, dan berkinerja tinggi.
 
-## 🚀 Teknologi Utama
+## 🚀 Teknologi Utama (Tech Stack)
 
-Proyek ini dibangun menggunakan arsitektur frontend statis yang modern dan optimal:
-- **Framework:** [Next.js 15.5](https://nextjs.org/) (App Router)
-- **UI Library:** [React 18](https://react.dev/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Animasi:** [Framer Motion](https://www.framer.com/motion/)
-- **Carousel:** [Embla Carousel](https://www.embla-carousel.com/)
-- **Icons:** [Lucide React](https://lucide.dev/)
-- **Validation:** [Zod](https://zod.dev/)
+Sistem ini didukung oleh ekosistem modern yang kokoh dan disiapkan untuk skala produksi:
 
-## ⚡ Fitur Utama & Optimasi Performa
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router, React 19)
+- **Database & Auth**: [Supabase](https://supabase.com/) (PostgreSQL & RLS Security)
+- **Email Engine**: [Resend API](https://resend.com/)
+- **PDF Engine**: [PDFKit](https://pdfkit.org/) terintegrasi via Edge/Node
+- **Validation**: [Zod](https://zod.dev/) untuk validasi form end-to-end
+- **Styling**: Tailwind CSS & Shadcn/UI (Framer Motion, Sonner Toasts)
 
-Beranda situs ini terdiri dari berbagai seksi interaktif (Hero, Statistik, Profil, Galeri Fasilitas, Berita, FAQ, dll). 
-Untuk memastikan pengalaman *First Contentful Paint* (FCP) dan *Time to Interactive* (TTI) yang secepat kilat (terutama di perangkat mobile via Vercel), proyek ini telah dioptimasi secara khusus:
+## 📌 Fitur Utama Terintegrasi
 
-1. **Lazy Loading Komponen Cerdas (`next/dynamic`)**
-   - Komponen berat (seperti Galeri Carousel) dan elemen *below the fold* (di bawah pandangan layar pertama) ditunda pemuatannya.
-   - Komponen widget (*FloatingChat*, *ScrollToTop*) dan modal dinamis dieksekusi secara asinkron tanpa memblokir benang utama browser.
-2. **Optimasi LCP (*Largest Contentful Paint*)**
-   - Aset visual utama pada elemen Hero diload menggunakan komponen `<Image>` Next.js lengkap dengan artibut `priority` dan `sizes` untuk render instan.
+1. **Layanan MCU Dinamis (End-to-End)**
+   - Manajemen jadwal MCU dan pemantauan kuota oleh Admin.
+   - Pendaftaran mandiri via publik dengan pencegahan kuota penuh (*real-time*).
+   - Pengiriman Bukti Pendaftaran berformat PDF resmi otomatis ke email pendaftar.
+2. **Whistleblowing System (WBS) & PPID**
+   - Panel respon admin terpusat untuk membalas pelaporan (WBS) dan permohonan informasi publik (PPID).
+   - Integrasi respons ke email pemohon menggunakan Resend API.
+   - Ekstraksi PDF dari riwayat aduan dan respons (Unduh Laporan PDF).
+3. **Optimasi Performa Ekstrim**
+   - *Image & Font Lazy-Loading* (Skor LCP optimal).
+   - Caching statis tingkat lanjut (`max-age=31536000`).
+   - Eksekusi Server Actions tanpa blocking dengan status *loading spinner* dan proteksi duplikasi data (Zero Double-Submit).
+4. **Chatbot AI Kenopia**
+   - Terintegrasi dengan Grok AI untuk menjawab pertanyaan spesifik seputar layanan kesehatan yustisial.
 
-## 🛠️ Cara Menjalankan Secara Lokal
+## 🛠️ Cara Setup (Development)
 
-1. **Clone repository ini** (jika belum) dan masuk ke dalam folder proyek.
-2. **Install dependencies:**
+Pastikan Anda memiliki Node.js v18+ dan NPM terinstal.
+
+1. **Clone & Install Dependensi**:
    ```bash
+   git clone <repository_url>
+   cd "PKY-"
    npm install
    ```
-3. **Jalankan Development Server:**
+
+2. **Konfigurasi Environment**:
+   Buat file `.env.local` di root direktori dengan menyalin dari referensi:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role
+   RESEND_API_KEY=your_resend_api_key
+   GROK_API_KEY=gsk_your_groq_api_key
+   ```
+
+3. **Jalankan Server Development**:
    ```bash
    npm run dev
    ```
-   Akses `http://localhost:3000` di browser Anda.
+   Aplikasi akan berjalan di `http://localhost:3000`.
 
-4. **Build untuk Production:**
-   ```bash
-   npm run build
-   npm run start
-   ```
+## 📦 Deployment (Production)
 
-## 📂 Struktur Direktori Utama
-
-- `/app` - Rute aplikasi (Next.js App Router). Mengandung halaman Beranda (`page.tsx`) dan tata letak akar (`layout.tsx`).
-- `/components/sections` - Bagian-bagian modular halaman utama (Hero, Profil, Galeri, dll).
-- `/components/ui` - Komponen antarmuka dasar yang bisa digunakan kembali (Button, Badge, Modal, dsb).
-- `/lib` - File utilitas, termasuk `site.ts` yang berisi konfigurasi data statis (informasi lembaga, FAQ, berita, fasilitas kesehatan).
-- `/public` - Aset statis berupa gambar (`/image/`) dan logo.
+Proyek ini telah dikeraskan (*hardened*) untuk lolos *build* Vercel atau environment Node.js standar.
+Eksekusi:
+```bash
+npm run build
+npm start
+```
+*Catatan: Pastikan dependensi eksternal seperti `pdfkit` telah lolos pre-bundle (dikonfigurasi dalam `serverExternalPackages` di `next.config.mjs`).*
 
 ---
-*Portal ini dideploy secara berkesinambungan di infrastruktur Vercel untuk memberikan akses yang cepat dan reliabel dari seluruh wilayah Indonesia.*
-
+**Pusat Kesehatan Yustisial** - Kejaksaan Republik Indonesia
+*Membangun kesehatan aparatur untuk penegakan hukum yang berintegritas.*
