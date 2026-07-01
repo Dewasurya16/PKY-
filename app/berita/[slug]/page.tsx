@@ -13,7 +13,13 @@ export const dynamic = "force-dynamic";
 
 export default async function NewsDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
-  const item = await getNewsBySlug(resolvedParams.slug);
+  let item;
+  
+  try {
+    item = await getNewsBySlug(resolvedParams.slug);
+  } catch (error) {
+    console.error("[NewsDetailPage] Error fetching data:", error);
+  }
 
   if (!item) {
     notFound();
@@ -59,7 +65,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
           )}
 
           <div className="prose prose-slate dark:prose-invert max-w-none prose-p:mb-4 prose-p:leading-relaxed whitespace-pre-wrap text-justify">
-            {parse(DOMPurify.sanitize(item.content))}
+            {parse(DOMPurify.sanitize(item?.content || ''))}
           </div>
         </div>
       </div>
