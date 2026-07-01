@@ -79,7 +79,7 @@ export default async function AdminMcuPage() {
                       "use server";
                       await deleteMcuSchedule(mcu.id);
                     }}>
-                      <button className="text-rose-500 hover:text-rose-600 transition-colors">
+                      <button className="text-rose-500 hover:text-rose-600 transition-colors" aria-label="Hapus Jadwal MCU" title="Hapus Jadwal MCU">
                         <Trash2 size={16} />
                       </button>
                     </form>

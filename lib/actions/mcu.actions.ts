@@ -10,9 +10,9 @@ import type { ActionState } from "@/lib/types/database";
 
 const mcuRegistrationSchema = z.object({
   schedule_id: z.string().uuid("Jadwal tidak valid"),
-  nama_pegawai: z.string().min(3, "Nama minimal 3 karakter"),
-  nip_nrp: z.string().min(5, "NIP/NRP minimal 5 karakter"),
-  email_pegawai: z.string().email("Email tidak valid"),
+  nama_pegawai: z.string().min(3, "Nama minimal 3 karakter").max(100, "Nama terlalu panjang (maks. 100)"),
+  nip_nrp: z.string().min(5, "NIP/NRP minimal 5 karakter").max(50, "NIP/NRP terlalu panjang (maks. 50)"),
+  email_pegawai: z.string().email("Email tidak valid").max(150, "Email terlalu panjang (maks. 150)"),
 });
 
 /** Server Action: Create MCU Schedule */

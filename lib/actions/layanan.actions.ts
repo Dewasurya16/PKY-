@@ -8,15 +8,15 @@ import type { ActionState } from "@/lib/types/database";
 import { sendNotificationEmail } from "@/lib/actions/email.actions";
 
 const ppidSchema = z.object({
-  user_name: z.string().min(3, "Nama lengkap minimal 3 karakter"),
-  email: z.string().email("Format email tidak valid"),
-  request_details: z.string().min(10, "Detail permohonan minimal 10 karakter"),
+  user_name: z.string().min(3, "Nama lengkap minimal 3 karakter").max(100, "Nama terlalu panjang (maks. 100)"),
+  email: z.string().email("Format email tidak valid").max(150, "Email terlalu panjang (maks. 150)"),
+  request_details: z.string().min(10, "Detail permohonan minimal 10 karakter").max(2000, "Detail terlalu panjang (maks. 2000)"),
 });
 
 const complaintSchema = z.object({
-  reporter_name: z.string().optional(),
-  subject: z.string().min(5, "Subjek minimal 5 karakter"),
-  message: z.string().min(10, "Pesan minimal 10 karakter"),
+  reporter_name: z.string().max(100, "Nama terlalu panjang (maks. 100)").optional(),
+  subject: z.string().min(5, "Subjek minimal 5 karakter").max(150, "Subjek terlalu panjang (maks. 150)"),
+  message: z.string().min(10, "Pesan minimal 10 karakter").max(2000, "Pesan terlalu panjang (maks. 2000)"),
   is_anonymous: z.boolean().default(false),
 });
 

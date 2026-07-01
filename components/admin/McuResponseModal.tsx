@@ -66,7 +66,7 @@ export function McuResponseModal({ registrationId, name, email, scheduleDate, fa
           <div className="relative w-full max-w-md bg-white rounded-2xl shadow-xl p-6 dark:bg-navy-dark dark:border dark:border-white/10 text-left">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold text-navy dark:text-white">Hubungi Pendaftar MCU</h3>
-              <button onClick={() => setIsOpen(false)} className="text-text-muted hover:text-navy dark:hover:text-white">
+              <button onClick={() => setIsOpen(false)} className="text-text-muted hover:text-navy dark:hover:text-white" aria-label="Tutup Modal" title="Tutup Modal">
                 <X size={20} />
               </button>
             </div>

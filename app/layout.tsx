@@ -26,8 +26,28 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: `${site.shortName} — ${site.fullName} | ${site.institution}`,
-  description: site.tagline,
+  metadataBase: new URL('https://pky.kejaksaan.go.id'),
+  title: {
+    template: '%s | PKY Kejari Rantau',
+    default: 'Portal Pusat Kesehatan Yustisial',
+  },
+  description: 'Layanan Terpadu Pusat Kesehatan Yustisial (PKY) Kejaksaan Republik Indonesia.',
+  openGraph: {
+    title: 'Portal Pusat Kesehatan Yustisial',
+    description: 'Layanan Terpadu Pusat Kesehatan Yustisial (PKY) Kejaksaan Republik Indonesia.',
+    url: 'https://pky.kejaksaan.go.id',
+    siteName: 'PKY Kejari Rantau',
+    images: [
+      {
+        url: '/icon.png',
+        width: 800,
+        height: 600,
+        alt: 'Logo PKY',
+      }
+    ],
+    locale: 'id_ID',
+    type: 'website',
+  },
   keywords: [
     "kejaksaan",
     "kesehatan",

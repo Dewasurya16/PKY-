@@ -9,9 +9,9 @@ import { logError } from "@/lib/utils/logger";
 import type { ActionState } from "@/lib/types/database";
 
 const infoRequestSchema = z.object({
-  facility_name: z.string().min(1, "Nama fasilitas wajib diisi"),
-  user_name: z.string().min(2, "Nama lengkap harus minimal 2 karakter"),
-  email_kejaksaan: z.string().email("Format email tidak valid"),
+  facility_name: z.string().min(1, "Nama fasilitas wajib diisi").max(150, "Nama fasilitas terlalu panjang"),
+  user_name: z.string().min(2, "Nama lengkap harus minimal 2 karakter").max(100, "Nama terlalu panjang"),
+  email_kejaksaan: z.string().email("Format email tidak valid").max(150, "Email terlalu panjang"),
 });
 
 export async function submitInfoRequest(

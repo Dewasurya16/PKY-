@@ -8,13 +8,16 @@ import { NEWS_CATEGORIES } from "@/lib/types/database";
 export const newsInsertSchema = z.object({
   title: z
     .string()
-    .min(1, "Judul wajib diisi"),
+    .min(1, "Judul wajib diisi")
+    .max(255, "Judul terlalu panjang (maks. 255)"),
   excerpt: z
     .string()
-    .min(1, "Ringkasan wajib diisi"),
+    .min(1, "Ringkasan wajib diisi")
+    .max(500, "Ringkasan terlalu panjang (maks. 500)"),
   content: z
     .string()
-    .min(1, "Konten wajib diisi"),
+    .min(1, "Konten wajib diisi")
+    .max(50000, "Konten terlalu panjang"),
   category: z.enum(NEWS_CATEGORIES, {
     message: "Pilih kategori yang valid",
   }),
