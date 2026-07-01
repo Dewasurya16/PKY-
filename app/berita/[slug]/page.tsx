@@ -7,9 +7,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/Badge";
 import parse from "html-react-parser";
-import DOMPurify from "isomorphic-dompurify";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function NewsDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
@@ -65,7 +65,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
           )}
 
           <div className="prose prose-slate dark:prose-invert max-w-none prose-p:mb-4 prose-p:leading-relaxed whitespace-pre-wrap text-justify">
-            {parse(DOMPurify.sanitize(item?.content || ''))}
+            {parse(item?.content || '')}
           </div>
         </div>
       </div>
