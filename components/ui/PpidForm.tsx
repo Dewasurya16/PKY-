@@ -2,8 +2,9 @@
 
 import { useActionState, useEffect } from "react";
 import { submitPpid } from "@/lib/actions/layanan.actions";
-import { Send } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 import { useFormStatus } from "react-dom";
+import { toast } from "sonner";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -13,7 +14,15 @@ function SubmitButton() {
       disabled={pending}
       className="flex items-center gap-2 rounded-xl bg-primary px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      {pending ? "Mengirim..." : "Ajukan Permohonan"} <Send size={16} />
+      {pending ? (
+        <>
+          <Loader2 size={16} className="animate-spin" /> Mengirim...
+        </>
+      ) : (
+        <>
+          Ajukan Permohonan <Send size={16} />
+        </>
+      )}
     </button>
   );
 }
@@ -23,10 +32,13 @@ export function PpidForm() {
 
   useEffect(() => {
     if (state.success) {
-      alert("Permohonan berhasil dikirim! Silakan tunggu tindak lanjut dari tim kami.");
-      // In a real app, you might use a toast library like Sonner or react-hot-toast
+      toast.success("Permohonan Terkirim!", {
+        description: "Silakan tunggu tindak lanjut dari tim kami."
+      });
     } else if (state.error && state.error !== "Validasi gagal") {
-      alert(`Gagal: ${state.error}`);
+      toast.error("Gagal Mengirim", {
+        description: state.error || "Terjadi kesalahan, silakan coba lagi."
+      });
     }
   }, [state]);
 

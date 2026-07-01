@@ -6,6 +6,7 @@ import { Calendar, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/Badge";
+import parse from "html-react-parser";
 
 export const dynamic = "force-dynamic";
 
@@ -56,8 +57,8 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
             </div>
           )}
 
-          <div className="prose prose-lg dark:prose-invert max-w-none text-text-secondary dark:text-white/80 whitespace-pre-wrap leading-relaxed text-justify">
-            {item.content}
+          <div className="prose prose-slate dark:prose-invert max-w-none prose-p:mb-4 prose-p:leading-relaxed whitespace-pre-wrap text-justify">
+            {parse(item.content)}
           </div>
         </div>
       </div>

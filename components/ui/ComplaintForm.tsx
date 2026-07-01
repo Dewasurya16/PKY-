@@ -2,8 +2,9 @@
 
 import { useActionState, useEffect } from "react";
 import { submitComplaint } from "@/lib/actions/layanan.actions";
-import { Send, EyeOff } from "lucide-react";
+import { Send, EyeOff, Loader2 } from "lucide-react";
 import { useFormStatus } from "react-dom";
+import { toast } from "sonner";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -13,7 +14,15 @@ function SubmitButton() {
       disabled={pending}
       className="flex items-center gap-2 rounded-xl bg-amber-500 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      {pending ? "Mengirim..." : "Kirim Laporan"} <Send size={16} />
+      {pending ? (
+        <>
+          <Loader2 size={16} className="animate-spin" /> Mengirim...
+        </>
+      ) : (
+        <>
+          Kirim Laporan <Send size={16} />
+        </>
+      )}
     </button>
   );
 }
@@ -23,9 +32,13 @@ export function ComplaintForm() {
 
   useEffect(() => {
     if (state.success) {
-      alert("Pengaduan berhasil dikirim! Laporan Anda telah tersimpan dengan aman.");
+      toast.success("Pengaduan Terkirim!", {
+        description: "Laporan Anda telah tersimpan dengan aman."
+      });
     } else if (state.error && state.error !== "Validasi gagal") {
-      alert(`Gagal: ${state.error}`);
+      toast.error("Gagal Mengirim", {
+        description: state.error || "Terjadi kesalahan, silakan coba lagi."
+      });
     }
   }, [state]);
 

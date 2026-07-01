@@ -1,7 +1,7 @@
 "use client";
 
 import { Search } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 type Column<T> = {
   key: string;
@@ -20,7 +20,7 @@ type DataTableProps<T> = {
 
 /**
  * Komponen tabel data reusable untuk admin panel.
- * Mendukung pencarian teks sederhana berdasarkan searchKey.
+ * Mendukung pencarian teks sederhana berdasarkan searchKey dengan debouncing.
  */
 export function DataTable<T extends Record<string, unknown>>({
   columns,
@@ -31,13 +31,27 @@ export function DataTable<T extends Record<string, unknown>>({
   isLoading = false,
 }: DataTableProps<T>) {
   const [query, setQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
 
-  const filteredData = searchKey
-    ? data.filter((item) => {
-        const value = String(item[searchKey] ?? "").toLowerCase();
-        return value.includes(query.toLowerCase());
-      })
-    : data;
+  // Debouncing effect for search input (300ms)
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedQuery(query);
+    }, 300);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [query]);
+
+  // Memoize the filtered data to prevent unnecessary re-renders
+  const filteredData = useMemo(() => {
+    if (!searchKey) return data;
+    return data.filter((item) => {
+      const value = String(item[searchKey] ?? "").toLowerCase();
+      return value.includes(debouncedQuery.toLowerCase());
+    });
+  }, [data, searchKey, debouncedQuery]);
 
   return (
     <div>
@@ -72,13 +86,13 @@ export function DataTable<T extends Record<string, unknown>>({
                 {columns.map((col) => (
                   <th
                     key={col.key}
-                    className="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-text-muted dark:text-white/50"
+                    className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-text-muted dark:text-white/50"
                   >
                     {col.label}
                   </th>
                 ))}
                 {onRowAction && (
-                  <th className="px-6 py-3 text-xs font-semibold uppercase tracking-wider text-text-muted dark:text-white/50">
+                  <th className="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-text-muted dark:text-white/50">
                     Aksi
                   </th>
                 )}

@@ -84,6 +84,10 @@ export function FloatingChat() {
               `Silakan tunggu **${retryAfter} detik** lalu coba lagi. 🕐`,
           );
         }
+        
+        if (response.status === 500) {
+          throw new Error("Maaf, asisten AI sedang mengalami kendala jaringan ke server. Mohon coba beberapa saat lagi.");
+        }
         const errorData = await response.json().catch(() => ({}));
         throw new Error(
           (errorData as { error?: string }).error ?? "Gagal menghubungi AI",

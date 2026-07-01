@@ -1,9 +1,13 @@
 "use client";
 
 import * as React from "react";
+import { useState, useActionState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, CheckCircle2 } from "lucide-react";
+import { X, CheckCircle2, Loader2, Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { submitInfoRequest } from "@/lib/actions/info-request.actions";
+import { toast } from "sonner";
+import type { ActionState } from "@/lib/types/database";
 
 interface InfoRequestModalProps {
   /** Apakah modal terbuka. */
@@ -14,8 +18,12 @@ interface InfoRequestModalProps {
   facilityName: string;
 }
 
+const initialState: ActionState = {
+  success: false,
+};
+
 /**
- * Modal sukses "Permintaan Informasi Terkirim" yang muncul setelah
+ * Modal "Minta Informasi Detail" yang muncul setelah
  * pengguna mengeklik "Minta Informasi Detail" di halaman hasil pencarian.
  */
 export function InfoRequestModal({
@@ -23,7 +31,26 @@ export function InfoRequestModal({
   onClose,
   facilityName,
 }: InfoRequestModalProps) {
-  React.useEffect(() => {
+  const [state, formAction, isPending] = useActionState(submitInfoRequest, initialState);
+
+  useEffect(() => {
+    if (state.success && !isPending) {
+      toast.success("Permintaan Terkirim!", {
+        description: "Tim PKY akan segera menghubungi Anda.",
+      });
+      if (state.warning) {
+        toast.warning(state.warning);
+      }
+      onClose();
+    } else if (state.error && !isPending) {
+      toast.error("Gagal Mengirim", {
+        description: state.error || "Terjadi kesalahan jaringan, silakan coba lagi.",
+      });
+    }
+  }, [state, isPending, onClose]);
+
+  // Reset body overflow when opened/closed
+  useEffect(() => {
     if (isOpen) {
       const scrollbarWidth =
         window.innerWidth - document.documentElement.clientWidth;
@@ -39,6 +66,10 @@ export function InfoRequestModal({
     };
   }, [isOpen]);
 
+  const handleClose = () => {
+    onClose();
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -49,7 +80,7 @@ export function InfoRequestModal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-navy/40 backdrop-blur-sm dark:bg-black/60"
-            onClick={onClose}
+            onClick={handleClose}
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
             <motion.div
@@ -61,7 +92,7 @@ export function InfoRequestModal({
               {/* Header */}
               <div className="flex justify-end p-4">
                 <button
-                  onClick={onClose}
+                  onClick={handleClose}
                   className="p-1.5 text-text-muted hover:text-navy dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-white/10"
                   aria-label="Tutup"
                 >
@@ -70,34 +101,78 @@ export function InfoRequestModal({
               </div>
 
               {/* Content */}
-              <div className="px-8 pb-8 text-center">
-                <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/30">
-                  <CheckCircle2
-                    size={40}
-                    className="text-emerald-600 dark:text-emerald-400"
-                  />
-                </div>
-                <h3 className="font-display text-2xl font-bold text-navy dark:text-white mb-3">
-                  Permintaan Informasi Terkirim!
+              <div className="px-8 pb-8">
+                <h3 className="font-display text-2xl font-bold text-navy dark:text-white mb-2">
+                  Minta Informasi Detail
                 </h3>
-                <p className="text-sm text-text-secondary dark:text-white/60 mb-2 leading-relaxed">
-                  Permintaan informasi detail mengenai{" "}
+                <p className="text-sm text-text-secondary dark:text-white/60 mb-6 leading-relaxed">
+                  Silakan isi form di bawah untuk meminta informasi detail mengenai{" "}
                   <strong className="text-navy dark:text-white">
                     {facilityName}
-                  </strong>{" "}
-                  telah berhasil dikirim.
+                  </strong>
+                  .
                 </p>
-                <p className="text-xs text-text-muted dark:text-white/40 mb-8">
-                  Tim PKY akan menghubungi Anda melalui email kejaksaan dalam
-                  1×24 jam kerja.
-                </p>
-                <Button
-                  variant="primary"
-                  className="w-full"
-                  onClick={onClose}
-                >
-                  Selesai
-                </Button>
+
+                <form action={formAction} className="space-y-4">
+                  <input type="hidden" name="facility_name" value={facilityName} />
+                  
+                  <div className="space-y-1.5">
+                    <label htmlFor="user_name" className="text-sm font-medium text-navy dark:text-white">
+                      Nama Lengkap
+                    </label>
+                    <input
+                      type="text"
+                      id="user_name"
+                      name="user_name"
+                      className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-white/10 dark:bg-white/5 dark:text-white"
+                      placeholder="Contoh: Budi Santoso"
+                      required
+                      disabled={isPending}
+                    />
+                    {state?.fieldErrors?.user_name && (
+                      <p className="text-xs text-rose-500 mt-1">{state.fieldErrors.user_name[0]}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label htmlFor="email_kejaksaan" className="text-sm font-medium text-navy dark:text-white">
+                      Email Kejaksaan
+                    </label>
+                    <input
+                      type="email"
+                      id="email_kejaksaan"
+                      name="email_kejaksaan"
+                      className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 dark:border-white/10 dark:bg-white/5 dark:text-white"
+                      placeholder="budi@kejaksaan.go.id"
+                      required
+                      disabled={isPending}
+                    />
+                    {state?.fieldErrors?.email_kejaksaan && (
+                      <p className="text-xs text-rose-500 mt-1">{state.fieldErrors.email_kejaksaan[0]}</p>
+                    )}
+                  </div>
+
+                  <div className="pt-4">
+                    <Button
+                      type="submit"
+                      variant="primary"
+                      className="w-full gap-2"
+                      disabled={isPending}
+                    >
+                      {isPending ? (
+                        <>
+                          <Loader2 size={18} className="animate-spin" />
+                          Memproses...
+                        </>
+                      ) : (
+                        <>
+                          <Send size={18} />
+                          Kirim Permintaan
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </form>
               </div>
             </motion.div>
           </div>

@@ -11,7 +11,9 @@ import {
   LogOut,
   FolderOpen,
   MessageSquareWarning,
-  CalendarClock
+  CalendarClock,
+  Inbox,
+  ClipboardList
 } from "lucide-react";
 import { logout } from "@/lib/actions/auth.actions";
 
@@ -28,7 +30,9 @@ const NAV_ITEMS: NavItem[] = [
   { href: "/admin/rumah-sakit", label: "Rumah Sakit", icon: Hospital },
   { href: "/admin/layanan/ppid", label: "PPID", icon: FolderOpen },
   { href: "/admin/layanan/pengaduan", label: "Pengaduan", icon: MessageSquareWarning },
+  { href: "/admin/layanan/info-requests", label: "Permintaan Info", icon: Inbox },
   { href: "/admin/layanan/mcu", label: "Jadwal MCU", icon: CalendarClock },
+  { href: "/admin/layanan/mcu-registrations", label: "Pendaftar MCU", icon: ClipboardList },
 ];
 
 export function AdminSidebar() {

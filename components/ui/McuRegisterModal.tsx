@@ -2,9 +2,9 @@
 
 import { useActionState, useEffect, useState } from "react";
 import { registerMcu } from "@/lib/actions/mcu.actions";
-import { X, Send } from "lucide-react";
+import { X, Send, Loader2 } from "lucide-react";
 import { useFormStatus } from "react-dom";
-import { showToast } from "@/lib/utils/toast";
+import { toast } from "sonner";
 
 function SubmitBtn() {
   const { pending } = useFormStatus();
@@ -14,7 +14,15 @@ function SubmitBtn() {
       disabled={pending}
       className="flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-dark disabled:opacity-50"
     >
-      {pending ? "Mendaftar..." : "Daftar Sekarang"} <Send size={16} />
+      {pending ? (
+        <>
+          <Loader2 size={16} className="animate-spin" /> Mendaftar...
+        </>
+      ) : (
+        <>
+          Daftar Sekarang <Send size={16} />
+        </>
+      )}
     </button>
   );
 }
@@ -32,13 +40,13 @@ export function McuRegisterModal({ scheduleId, facilityName, isFull }: McuRegist
   useEffect(() => {
     if (state.success) {
       if (state.warning) {
-        showToast("Pendaftaran Berhasil", state.warning, "info");
+        toast.warning("Pendaftaran Berhasil", { description: state.warning });
       } else {
-        showToast("Pendaftaran Berhasil", "Bukti pendaftaran dikirim ke email Anda.", "success");
+        toast.success("Pendaftaran Berhasil", { description: "Bukti pendaftaran dikirim ke email Anda." });
       }
       setIsOpen(false);
     } else if (state.error && state.error !== "Validasi gagal") {
-      showToast("Pendaftaran Gagal", state.error, "error");
+      toast.error("Pendaftaran Gagal", { description: state.error });
     }
   }, [state]);
 

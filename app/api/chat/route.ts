@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAvailableFacilities } from "@/lib/queries/facility.queries";
 import { getMcuSchedulesToday } from "@/lib/queries/mcu.queries";
+import { getPublishedNews } from "@/lib/queries/news.queries";
 import { createRateLimiter, getClientIp } from "@/lib/utils/rate-limiter";
 import { logError } from "@/lib/utils/logger";
 import type { ChatMessage } from "@/lib/types/database";
@@ -22,7 +23,7 @@ const chatLimiter = createRateLimiter({
  * Mengonfigurasi persona AI sebagai Asisten Pintar PKY
  * dengan batasan topik dan gaya bicara profesional.
  */
-const SYSTEM_PROMPT = `Kamu adalah **Asisten Pintar PKY** (Pusat Kesehatan Yustisial), chatbot resmi milik Kejaksaan Republik Indonesia.
+const SYSTEM_PROMPT = `Anda adalah Asisten Cerdas Resmi PKY Kejaksaan. Anda WAJIB menjawab pertanyaan pengguna secara taktis, cerdas, dan berbasis 100% pada data kontekstual database yang disediakan. Jika data tidak ditemukan, katakan dengan sopan bahwa informasi belum di-input oleh admin.
 
 ## IDENTITAS
 - Nama: Asisten PKY
@@ -35,7 +36,7 @@ const SYSTEM_PROMPT = `Kamu adalah **Asisten Pintar PKY** (Pusat Kesehatan Yusti
 2. Menginformasikan jadwal MCU (Medical Check-Up) hari ini.
 3. Menjelaskan layanan PKY: telemedicine 24 jam, konsultasi spesialis, rujukan, farmasi.
 4. Menjawab pertanyaan umum seputar prosedur administrasi kesehatan di lingkungan Kejaksaan RI.
-5. Menginformasikan cara mengajukan permohonan PPID atau melaporkan pengaduan WBS.
+5. Menginformasikan berita kesehatan terbaru instansi.
 
 ## BATASAN
 - JANGAN memberikan diagnosis medis atau saran pengobatan spesifik.
@@ -44,8 +45,14 @@ const SYSTEM_PROMPT = `Kamu adalah **Asisten Pintar PKY** (Pusat Kesehatan Yusti
 - Selalu utamakan akurasi data. Jika data tidak tersedia di konteks, nyatakan dengan jujur.
 - Jawab dalam maksimal 3 paragraf kecuali diminta detail.
 
+PENTING - KOREKSI LOGIKA TANGGAL: Jika pengguna menanyakan ketersediaan jadwal, namun kombinasi hari dan tanggal yang mereka sebutkan keliru atau tidak sinkron dengan kalender nyata (misalnya pengguna menyebut 'Minggu 9 Juli' padahal 9 Juli adalah hari Kamis, atau sebaliknya), JANGAN langsung menjawab 'tidak ada jadwal'. Anda WAJIB bersikap proaktif.
+1. Deteksi ketidakcocokan tersebut.
+2. Cari data terdekat di context Anda (misal jadwal di tanggal 9, atau jadwal di hari Minggu).
+3. Berikan saran koreksi yang sopan. Contoh: 'Maaf, sepertinya ada kekeliruan. Tanggal 9 Juli adalah hari Kamis. Apakah yang Anda maksud adalah jadwal hari Kamis, 9 Juli atau Minggu, 12 Juli? Berikut detailnya...'
+
 ## FORMAT
-- Gunakan markdown ringan (bold, list) untuk keterbacaan.
+- Selalu format jadwal yang ditemukan menggunakan **Bullet Points** atau **Bold** pada Jam dan Nama Fasilitas agar lebih mudah di-scan oleh pengguna.
+- Gunakan markdown ringan lainnya untuk keterbacaan.
 - Sertakan nomor telepon/alamat jika relevan.`;
 
 /**
@@ -56,9 +63,10 @@ const SYSTEM_PROMPT = `Kamu adalah **Asisten Pintar PKY** (Pusat Kesehatan Yusti
  */
 async function buildDynamicContext(): Promise<string> {
   try {
-    const [facilities, mcuToday] = await Promise.all([
+    const [facilities, mcuToday, news] = await Promise.all([
       getAvailableFacilities(),
       getMcuSchedulesToday(),
+      getPublishedNews(),
     ]);
 
     const facilityContext =
@@ -88,9 +96,25 @@ async function buildDynamicContext(): Promise<string> {
             .join("\n")
         : "Tidak ada jadwal MCU hari ini.";
 
-    return `\n\n## DATA KONTEKS TERKINI\n\n### Daftar Fasilitas Kesehatan Aktif:\n${facilityContext}\n\n### Jadwal MCU Hari Ini (${todayStr}):\n${mcuContext}`;
+    const newsContext =
+      news.length > 0
+        ? news
+            .slice(0, 5) // Hanya 5 berita terbaru
+            .map(
+              (n) =>
+                `- **${n.title}** (${new Date(n.published_at).toLocaleDateString("id-ID")}) [Kategori: ${n.category}]`
+            )
+            .join("\n")
+        : "Tidak ada berita terbaru saat ini.";
+
+    return `\n\n## DATA KONTEKS TERKINI\n\n### Daftar Fasilitas Kesehatan Aktif:\n${facilityContext}\n\n### Jadwal MCU Hari Ini (${todayStr}):\n${mcuContext}\n\n### Berita Terbaru:\n${newsContext}`;
   } catch (error) {
-    await logError("buildDynamicContext", error);
+    console.error('[Chat Route Error]:', error);
+    try {
+      await logError("buildDynamicContext", error);
+    } catch (e) {
+      console.error('[Chat Route Error] Failed to log error:', e);
+    }
     return "\n\n## DATA KONTEKS\nData tidak tersedia saat ini. Arahkan pengguna ke hotline PKY.";
   }
 }

@@ -57,6 +57,18 @@ export type Facility = {
   updated_at: string;
 };
 
+// ──────────────────────────── Info Requests ────────────────────────────
+
+export type InfoRequest = {
+  id: string;
+  facility_name: string;
+  user_name: string;
+  email_kejaksaan: string;
+  status: "pending" | "selesai";
+  created_at: string;
+  updated_at: string;
+};
+
 // ──────────────────────────── Action State ────────────────────────────
 
 /**
@@ -151,6 +163,18 @@ export type McuSchedule = {
   quota: number;
   registered: number;
   is_active: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+export type McuRegistration = {
+  id: string;
+  schedule_id: string;
+  nama_pegawai: string;
+  nip_nrp: string;
+  email_pegawai: string;
+  schedule_date?: string; // from join
+  facility_name?: string; // from join
   created_at: string;
   updated_at: string;
 };

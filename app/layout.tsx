@@ -9,6 +9,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 const FloatingChat = dynamic(() => import("@/components/ui/FloatingChat").then(mod => mod.FloatingChat));
 const ScrollToTop = dynamic(() => import("@/components/ui/ScrollToTop").then(mod => mod.ScrollToTop));
 import { Toaster } from "sonner";
+import { Analytics } from "@vercel/analytics/next";
 
 const jakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -60,6 +61,7 @@ export default function RootLayout({
           <ScrollToTop />
           <Toaster richColors position="top-right" />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

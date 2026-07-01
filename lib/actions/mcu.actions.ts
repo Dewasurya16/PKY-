@@ -147,5 +147,38 @@ export async function registerMcu(
 
   revalidatePath("/mcu");
   revalidatePath("/admin/layanan/mcu");
+  revalidatePath("/admin/layanan/mcu-registrations");
   return { success: true, ...(warningMsg && { warning: warningMsg }) };
+}
+
+/** Server Action: Send Custom Email from Admin to MCU Registrant */
+export async function sendMcuAdminResponse(
+  prevState: ActionState,
+  formData: FormData,
+): Promise<ActionState> {
+  const name = formData.get("nama_pegawai") as string;
+  const to = formData.get("email_pegawai") as string;
+  const scheduleDate = formData.get("schedule_date") as string;
+  const facilityName = formData.get("facility_name") as string;
+  const customMessage = formData.get("custom_message") as string;
+
+  if (!name || !to || !scheduleDate || !facilityName || !customMessage) {
+    return { success: false, error: "Semua field harus diisi." };
+  }
+
+  const { sendMcuCustomEmail } = await import("@/lib/actions/email.actions");
+  
+  const emailRes = await sendMcuCustomEmail({
+    to,
+    name,
+    scheduleDate,
+    facilityName,
+    customMessage,
+  });
+
+  if (!emailRes.success) {
+    return { success: false, error: emailRes.error };
+  }
+
+  return { success: true, ...(emailRes.warning && { warning: emailRes.warning }) };
 }

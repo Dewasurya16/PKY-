@@ -1,6 +1,6 @@
 import "server-only";
 import { createAdminClient } from "@/lib/supabase/admin";
-import type { McuSchedule } from "@/lib/types/database";
+import type { McuSchedule, McuRegistration } from "@/lib/types/database";
 
 /**
  * Mengambil jadwal MCU hari ini dari tabel `mcu_schedules`.
@@ -70,4 +70,37 @@ export async function getAllMcuSchedules(): Promise<McuSchedule[]> {
     ...row,
     facility_name: (row.facilities as { name: string } | null)?.name ?? "Unknown",
   })) as McuSchedule[];
+}
+
+/**
+ * Mengambil semua data pendaftaran MCU beserta relasi jadwal dan fasilitas.
+ */
+export async function getAllMcuRegistrations() {
+  const supabase = createAdminClient();
+
+  const { data, error } = await supabase
+    .from("mcu_registrations")
+    .select(`
+      *,
+      mcu_schedules (
+        schedule_date,
+        facilities ( name )
+      )
+    `)
+    .order("created_at", { ascending: false })
+    .limit(100);
+
+  if (error) {
+    if (error.code === "42P01" || error.message.includes("does not exist")) {
+      return [];
+    }
+    console.error("[getAllMcuRegistrations] Supabase Error:", error);
+    return [];
+  }
+
+  return (data ?? []).map((row: Record<string, any>) => ({
+    ...row,
+    schedule_date: row.mcu_schedules?.schedule_date ?? "Unknown",
+    facility_name: row.mcu_schedules?.facilities?.name ?? "Unknown",
+  })) as McuRegistration[];
 }
